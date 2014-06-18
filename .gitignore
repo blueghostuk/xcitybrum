@@ -121,6 +121,7 @@ publish/
 # Publish Web Output
 *.[Pp]ublish.xml
 *.azurePubxml
+*.pubxml
 
 # NuGet Packages Directory
 packages/
@@ -185,7 +186,8 @@ FakesAssemblies/
 .LSOverride
 
 # Icon must ends with two \r.
-Icon
+Icon
+
 
 # Thumbnails
 ._*
