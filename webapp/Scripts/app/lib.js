@@ -36,13 +36,13 @@
         XCityBrum.Train = Train;
 
         var Station = (function () {
-            function Station(crsCode, name, latLng, isFavourite) {
-                if (typeof isFavourite === "undefined") { isFavourite = false; }
+            function Station(crsCode, name, latLng, fullName) {
+                if (typeof fullName === "undefined") { fullName = ""; }
                 this.crsCode = crsCode;
                 this.name = name;
                 this.latLng = latLng;
-                this.isFavourite = ko.observable(isFavourite);
-
+                this.fullName = fullName;
+                this.isFavourite = ko.observable(false);
                 var self = this;
                 this.starClass = ko.computed(function () {
                     return self.isFavourite() ? "icon-star-filled" : "icon-star";

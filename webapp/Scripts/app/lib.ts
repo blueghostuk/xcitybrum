@@ -34,11 +34,9 @@ module TrainNotifier.XCityBrum {
 
         public starClass: KnockoutComputed<string>;
 
-        public isFavourite: KnockoutObservable<boolean>;
+        public isFavourite = ko.observable(false);
 
-        constructor(public crsCode: string, public name: string, public latLng: GeoLocation, isFavourite: boolean = false) {
-
-            this.isFavourite = ko.observable(isFavourite);
+        constructor(public crsCode: string, public name: string, public latLng: GeoLocation, public fullName: string = "") {
 
             var self = this;
             this.starClass = ko.computed(function () {
@@ -56,6 +54,6 @@ module TrainNotifier.XCityBrum {
             }
             return false;
         }
-        
+
     }
 }

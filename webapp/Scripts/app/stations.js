@@ -1,8 +1,8 @@
 ﻿var allStations = new Array();
 
-allStations.push(new TrainNotifier.XCityBrum.Station("LIF", "Lichfield Trent Valley", { lat: 52, lng: 1 }));
+allStations.push(new TrainNotifier.XCityBrum.Station("LIF", "L'field T. Valley", { lat: 52, lng: 1 }, "Lichfield Trent Valley"));
 
-allStations.push(new TrainNotifier.XCityBrum.Station("LIC", "Lichfield City", { lat: 52, lng: 1 }));
+allStations.push(new TrainNotifier.XCityBrum.Station("LIC", "L'field City", { lat: 52, lng: 1 }, "Lichfield City"));
 
 allStations.push(new TrainNotifier.XCityBrum.Station("SEN", "Shenstone", { lat: 52, lng: 1 }));
 
@@ -18,7 +18,7 @@ allStations.push(new TrainNotifier.XCityBrum.Station("WYL", "Wylde Green", { lat
 
 allStations.push(new TrainNotifier.XCityBrum.Station("CRD", "Chester Road", { lat: 52, lng: 1 }));
 
-allStations.push(new TrainNotifier.XCityBrum.Station("ERD", "Erdington", { lat: 52, lng: 1 }, false));
+allStations.push(new TrainNotifier.XCityBrum.Station("ERD", "Erdington", { lat: 52, lng: 1 }));
 
 allStations.push(new TrainNotifier.XCityBrum.Station("GVH", "Gravelly Hill", { lat: 52, lng: 1 }));
 
@@ -26,7 +26,7 @@ allStations.push(new TrainNotifier.XCityBrum.Station("AST", "Aston", { lat: 52, 
 
 allStations.push(new TrainNotifier.XCityBrum.Station("DUD", "Duddeston", { lat: 52, lng: 1 }));
 
-allStations.push(new TrainNotifier.XCityBrum.Station("BHM", "Birmingham New St.", { lat: 52, lng: 1 }));
+allStations.push(new TrainNotifier.XCityBrum.Station("BHM", "B'ham New St.", { lat: 52, lng: 1 }, "Birmingham New Street"));
 
 allStations.push(new TrainNotifier.XCityBrum.Station("FWY", "Five Ways", { lat: 52, lng: 1 }));
 
@@ -61,7 +61,7 @@ var TrainNotifier;
                 query = query.toUpperCase();
 
                 return allStations.filter(function (station) {
-                    return station.crsCode.toUpperCase().indexOf(query) > -1 || station.name.toUpperCase().indexOf(query) > -1;
+                    return station.crsCode.toUpperCase().indexOf(query) > -1 || station.name.toUpperCase().indexOf(query) > -1 || station.fullName.toUpperCase().indexOf(query) > -1;
                 });
             };
             return StationHelper;
