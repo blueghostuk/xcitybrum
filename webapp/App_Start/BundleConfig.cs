@@ -14,6 +14,12 @@ namespace webapp.App_Start
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                 "~/Scripts/jquery-{version}.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
+                "~/Scripts/knockout-{version}.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/underscore").Include(
+                "~/Scripts/underscore.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/ratchet").Include(
                 "~/Scripts/ratchet.js"));
 
@@ -21,7 +27,12 @@ namespace webapp.App_Start
                 "~/Scripts/moment.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
-                "~/Scripts/app/*.js"));
+                "~/Scripts/app/lib.js",
+                "~/Scripts/app/stations.js",
+                "~/Scripts/app/globalKnockout.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/app-index").Include(
+                "~/Scripts/app/index/index.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/ratchet.css",
