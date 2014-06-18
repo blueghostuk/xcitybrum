@@ -2,28 +2,76 @@
     Layout = "~/_Layout.cshtml";
 }
 
-<p class="content-padded">Thanks for downloading Ratchet. This is an example HTML page that's linked up to compiled Ratchet CSS and JS, has the proper meta tags and the HTML structure. Need some more help before you start filling this with your own content? Check out some Ratchet resources:</p>
+@section NavBar{
+    <header class="bar bar-nav">
+        <h1 class="title">X City Brum</h1>
+    </header>
+}
+
+<style type="text/css">
+    .table-view-cell > a:not(.btn){
+        display: inline-block !important;
+    }
+</style>
+
 <div class="card">
-    <ul class="table-view">
+    <ul class="table-view" id="app-index">
+        <li class="table-view-cell table-view-divider">Favourite Stations</li>
+        <!-- ko foreach: favourites -->
         <li class="table-view-cell">
-            <a class="push-right" href="http://goratchet.com">
-                <strong>Ratchet documentation</strong>
-            </a>
+            <span class="icon pull-right" data-bind="css: starClass, click: toggleFavourite"></span>
+            <a data-bind="attr: { href: '/station#!' + crsCode }, text: name"></a>
         </li>
+        <!-- /ko -->
+        <li class="table-view-cell table-view-divider">Nearest Stations</li>
+        <!-- ko foreach: nearest -->
         <li class="table-view-cell">
-            <a class="push-right" href="https://github.com/twbs/ratchet/">
-                <strong>Ratchet on Github</strong>
-            </a>
+            <span class="icon pull-right" data-bind="css: starClass, click: toggleFavourite"></span>
+            <a data-bind="attr: { href: '/station#!' + crsCode }, text: name"></a>
         </li>
+        <!-- /ko -->
+        <li class="table-view-cell table-view-divider">Choose Other Station</li>
         <li class="table-view-cell">
-            <a class="push-right" href="https://groups.google.com/forum/#!forum/goratchet">
-                <strong>Ratchet Google group</strong>
-            </a>
+            <form>
+                <input type="search" autocomplete="off" id="app-index-station-search" placeholder="Enter Station Name or Code">
+            </form>
         </li>
+        <!-- ko foreach: searchResults -->
         <li class="table-view-cell">
-            <a class="push-right" href="https://twitter.com/goratchet">
-                <strong>Ratchet on Twitter</strong>
-            </a>
+            <span class="icon pull-right" data-bind="css: starClass, click: toggleFavourite"></span>
+            <a data-bind="attr: { href: '/station#!' + crsCode }, text: name"></a>
         </li>
+        <!-- /ko -->
     </ul>
 </div>
+
+@section Footer{
+    <nav class="bar bar-tab">
+        <a class="tab-item active" href="#">
+            <span class="icon icon-home"></span>
+            <span class="tab-label">Home</span>
+        </a>
+        <a class="tab-item" href="#">
+            <span class="icon icon-person"></span>
+            <span class="tab-label">Profile</span>
+        </a>
+        <a class="tab-item" href="#">
+            <span class="icon icon-star-filled"></span>
+            <span class="tab-label">Favorites</span>
+        </a>
+        <a class="tab-item" href="#">
+            <span class="icon icon-search"></span>
+            <span class="tab-label">Search</span>
+        </a>
+        <a class="tab-item" href="#">
+            <span class="icon icon-gear"></span>
+            <span class="tab-label">Settings</span>
+        </a>
+    </nav>
+}
+
+@using System.Web.Optimization;
+
+@section AdditionalJs{
+    @Scripts.Render("~/bundles/app-index")
+}

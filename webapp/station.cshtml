@@ -1,0 +1,57 @@
+﻿@{
+    Layout = "~/_Layout.cshtml";
+}
+
+@section NavBar{
+    <header class="bar bar-nav">
+    <a class="icon icon-left-nav pull-left" href="~/index"></a>
+    <a class="icon icon-refresh pull-right"></a>
+    <h1 class="title">X City Brum: Five Ways</h1>
+</header>
+}
+<div class="card">
+    <ul class="table-view">
+        <li class="table-view-cell table-view-divider">Approaching Trains</li>
+        <li class="table-view-cell">
+            <a class="navigate-right" href="~/train#!P63646/2014/06/18">P2 19:56 to Longbridge due in 1 minute</a>
+        </li>
+        <li class="table-view-cell">
+            <a class="navigate-right" href="~/train#!P63646/2014/06/18">P1 19:59 to Lichfield Trent Valley due in 2 minute</a>
+        </li>
+        <li class="table-view-cell">
+            <a class="navigate-right" href="~/train#!P63646/2014/06/18">P1 20:09 to Birmingham New Street due in 11 minute</a>
+        </li>
+        <li class="table-view-cell table-view-divider">Recent Trains</li>
+        <li class="table-view-cell">
+            <a class="navigate-right" href="~/train#!P63646/2014/06/18">P1 19:49 to Birmingham New Street 1 minute ago</a>
+        </li>
+        <li class="table-view-cell">
+            <a class="navigate-right" href="~/train#!P63646/2014/06/18">P2 19:46 to Reddich due 2 minutes ago</a>
+        </li>
+    </ul>
+</div>
+
+@section Footer{
+    <nav class="bar bar-tab">
+        <a class="tab-item active" href="#">
+            <span class="icon icon-home"></span>
+            <span class="tab-label">Home</span>
+        </a>
+        <a class="tab-item" href="#">
+            <span class="icon icon-person"></span>
+            <span class="tab-label">Profile</span>
+        </a>
+        <a class="tab-item" href="#">
+            <span class="icon icon-star-filled"></span>
+            <span class="tab-label">Favorites</span>
+        </a>
+        <a class="tab-item" href="#">
+            <span class="icon icon-search"></span>
+            <span class="tab-label">Search</span>
+        </a>
+        <a class="tab-item" href="#">
+            <span class="icon icon-gear"></span>
+            <span class="tab-label">Settings</span>
+        </a>
+    </nav>
+}

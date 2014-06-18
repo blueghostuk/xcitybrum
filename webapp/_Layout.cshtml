@@ -16,19 +16,22 @@
 </head>
 
 <body>
-    <header class="bar bar-nav">
-        <h1 class="title">X City Brum</h1>
-    </header>
+    @RenderSection("NavBar")
 
     <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
     <div class="content">
         @RenderBody()
     </div>
 
+    @RenderSection("Footer")
 
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/underscore")
+    @Scripts.Render("~/bundles/knockout")
     @Scripts.Render("~/bundles/ratchet")
     @Scripts.Render("~/bundles/moment")
     @Scripts.Render("~/bundles/app")
+
+    @RenderSection("AdditionalJs", required: false)
 </body>
 </html>

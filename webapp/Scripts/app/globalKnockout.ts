@@ -1,0 +1,1 @@
+﻿var favouriteStations = ko.observableArray<TrainNotifier.XCityBrum.Station>();
