@@ -29,7 +29,8 @@ namespace webapp.App_Start
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
                 "~/Scripts/app/lib.js",
                 "~/Scripts/app/stations.js",
-                "~/Scripts/app/globalKnockout.js"));
+                "~/Scripts/app/globalKnockout.js",
+                "~/Scripts/app/global.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/app-index").Include(
                 "~/Scripts/app/index/index.js"));

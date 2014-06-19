@@ -2,6 +2,10 @@
     Layout = "~/_Layout.cshtml";
 }
 
+@section Title{
+    XCity Brum
+}
+
 @section NavBar{
     <header class="bar bar-nav">
         <h1 class="title">X City Brum</h1>
@@ -9,7 +13,7 @@
 }
 
 <style type="text/css">
-    .table-view-cell > a:not(.btn){
+    .table-view-cell > a:not(.btn) {
         display: inline-block !important;
     }
 </style>
@@ -20,14 +24,14 @@
         <!-- ko foreach: favourites -->
         <li class="table-view-cell">
             <span class="icon pull-right" data-bind="css: starClass, click: toggleFavourite"></span>
-            <a data-bind="attr: { href: '/station#!' + crsCode }, text: name"></a>
+            <a data-bind="attr: { href: '/station#!' + crsCode }, text: name" data-transition="slide-in"></a>
         </li>
         <!-- /ko -->
         <li class="table-view-cell table-view-divider">Nearest Stations</li>
         <!-- ko foreach: nearest -->
         <li class="table-view-cell">
             <span class="icon pull-right" data-bind="css: starClass, click: toggleFavourite"></span>
-            <a data-bind="attr: { href: '/station#!' + crsCode }, text: name"></a>
+            <a data-bind="attr: { href: '/station#!' + crsCode }, text: name" data-transition="slide-in"></a>
         </li>
         <!-- /ko -->
         <li class="table-view-cell table-view-divider">Choose Other Station</li>
@@ -39,7 +43,7 @@
         <!-- ko foreach: searchResults -->
         <li class="table-view-cell">
             <span class="icon pull-right" data-bind="css: starClass, click: toggleFavourite"></span>
-            <a data-bind="attr: { href: '/station#!' + crsCode }, text: name"></a>
+            <a data-bind="attr: { href: '/station#!' + crsCode }, text: name" data-transition="slide-in"></a>
         </li>
         <!-- /ko -->
     </ul>

@@ -2,31 +2,35 @@
     Layout = "~/_Layout.cshtml";
 }
 
+@section Title{
+    XCity Brum: Station
+}
+
 @section NavBar{
     <header class="bar bar-nav">
-    <a class="icon icon-left-nav pull-left" href="~/index"></a>
-    <a class="icon icon-refresh pull-right"></a>
-    <h1 class="title">X City Brum: Five Ways</h1>
-</header>
+        <a class="icon icon-left-nav pull-left" href="~/index" data-transition="slide-out"></a>
+        <a class="icon icon-refresh pull-right"></a>
+        <h1 class="title">X City Brum: Five Ways</h1>
+    </header>
 }
 <div class="card">
     <ul class="table-view">
         <li class="table-view-cell table-view-divider">Approaching Trains</li>
         <li class="table-view-cell">
-            <a class="navigate-right" href="~/train#!P63646/2014/06/18">P2 19:56 to Longbridge due in 1 minute</a>
+            <a class="navigate-right" href="~/train#!P63646/2014/06/18" data-transition="slide-in">P2 19:56 to Longbridge due in 1 minute</a>
         </li>
         <li class="table-view-cell">
-            <a class="navigate-right" href="~/train#!P63646/2014/06/18">P1 19:59 to Lichfield Trent Valley due in 2 minute</a>
+            <a class="navigate-right" href="~/train#!P63646/2014/06/18" data-transition="slide-in">P1 19:59 to Lichfield Trent Valley due in 2 minute</a>
         </li>
         <li class="table-view-cell">
-            <a class="navigate-right" href="~/train#!P63646/2014/06/18">P1 20:09 to Birmingham New Street due in 11 minute</a>
+            <a class="navigate-right" href="~/train#!P63646/2014/06/18" data-transition="slide-in">P1 20:09 to Birmingham New Street due in 11 minute</a>
         </li>
         <li class="table-view-cell table-view-divider">Recent Trains</li>
         <li class="table-view-cell">
-            <a class="navigate-right" href="~/train#!P63646/2014/06/18">P1 19:49 to Birmingham New Street 1 minute ago</a>
+            <a class="navigate-right" href="~/train#!P63646/2014/06/18" data-transition="slide-in">P1 19:49 to Birmingham New Street 1 minute ago</a>
         </li>
         <li class="table-view-cell">
-            <a class="navigate-right" href="~/train#!P63646/2014/06/18">P2 19:46 to Reddich due 2 minutes ago</a>
+            <a class="navigate-right" href="~/train#!P63646/2014/06/18" data-transition="slide-in">P2 19:46 to Reddich due 2 minutes ago</a>
         </li>
     </ul>
 </div>

@@ -12,7 +12,7 @@ nearestStations.push(TrainNotifier.XCityBrum.StationHelper.findStationByCRSCode(
 nearestStations.push(TrainNotifier.XCityBrum.StationHelper.findStationByCRSCode("BHM"));
 
 $(function () {
-    ko.applyBindings(indexModel, $("#app-index")[0]);
+    loadIndex();
 
     $("#app-index-station-search").on('keyup', function (e) {
         var code = e.keyCode || e.which;
@@ -23,6 +23,10 @@ $(function () {
         updateSearchResults($(this).val());
     });
 });
+
+function loadIndex() {
+    ko.applyBindings(indexModel, $("#app-index")[0]);
+}
 
 function updateSearchResults(query) {
     stationSearchResults.removeAll();
