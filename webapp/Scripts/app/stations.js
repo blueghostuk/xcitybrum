@@ -43,31 +43,4 @@ allStations.push(new TrainNotifier.XCityBrum.Station("NFD", "Northfield", { lat:
 allStations.push(new TrainNotifier.XCityBrum.Station("LOB", "Longbridge", { lat: 52, lng: 1 }));
 
 allStations.push(new TrainNotifier.XCityBrum.Station("BTG", "Barnt Green", { lat: 52, lng: 1 }));
-
-var TrainNotifier;
-(function (TrainNotifier) {
-    (function (XCityBrum) {
-        var StationHelper = (function () {
-            function StationHelper() {
-            }
-            StationHelper.findStationByCRSCode = function (crsCode) {
-                crsCode = crsCode.toUpperCase();
-                return _.find(allStations, function (station) {
-                    return station.crsCode == crsCode;
-                });
-            };
-
-            StationHelper.searchStations = function (query) {
-                query = query.toUpperCase();
-
-                return allStations.filter(function (station) {
-                    return station.crsCode.toUpperCase().indexOf(query) > -1 || station.name.toUpperCase().indexOf(query) > -1 || station.fullName.toUpperCase().indexOf(query) > -1;
-                });
-            };
-            return StationHelper;
-        })();
-        XCityBrum.StationHelper = StationHelper;
-    })(TrainNotifier.XCityBrum || (TrainNotifier.XCityBrum = {}));
-    var XCityBrum = TrainNotifier.XCityBrum;
-})(TrainNotifier || (TrainNotifier = {}));
 //# sourceMappingURL=stations.js.map

@@ -52,7 +52,53 @@ module TrainNotifier.XCityBrum {
                 this.isFavourite(true);
                 favouriteStations.push(this);
             }
-            return false;
+            Storage.setStationFavourites(favouriteStations());
+        }
+
+    }
+
+    export class StationHelper {
+        static findStationByCRSCode(crsCode: string) {
+            crsCode = crsCode.toUpperCase();
+            return _.find(allStations, function (station) {
+                return station.crsCode == crsCode;
+            });
+        }
+
+        static searchStations(query: string) {
+            query = query.toUpperCase();
+
+            return allStations.filter(function (station) {
+                return station.crsCode.toUpperCase().indexOf(query) > -1
+                    || station.name.toUpperCase().indexOf(query) > -1
+                    || station.fullName.toUpperCase().indexOf(query) > -1;
+            });
+        }
+    }
+
+    export class Storage {
+
+        static getFavouriteStations() {
+            var favs = new Array<Station>();
+            var storageValue = <string>localStorage.getItem("fav-stations");
+            if (storageValue) {
+                var crsCodes = storageValue.split(",");
+                for (var i = 0; i < crsCodes.length; i++) {
+                    var station = StationHelper.findStationByCRSCode(crsCodes[i]);
+                    if (station) {
+                        station.isFavourite(true);
+                        favs.push(station);
+                    }
+                }
+            }
+            return favs;
+        }
+
+        static setStationFavourites(stations: Array<Station>) {
+            var crsCodes = stations.map(function (station) {
+                return station.crsCode;
+            });
+            localStorage.setItem("fav-stations", crsCodes.join(","));
         }
 
     }

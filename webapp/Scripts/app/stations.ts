@@ -112,24 +112,3 @@ allStations.push(new TrainNotifier.XCityBrum.Station(
     "BTG",
     "Barnt Green",
     { lat: 52, lng: 1 }));
-
-module TrainNotifier.XCityBrum {
-    export class StationHelper {
-        static findStationByCRSCode(crsCode: string) {
-            crsCode = crsCode.toUpperCase();
-            return _.find(allStations, function (station) {
-                return station.crsCode == crsCode;
-            });
-        }
-
-        static searchStations(query: string) {
-            query = query.toUpperCase();
-
-            return allStations.filter(function (station) {
-                return station.crsCode.toUpperCase().indexOf(query) > -1
-                    || station.name.toUpperCase().indexOf(query) > -1
-                    || station.fullName.toUpperCase().indexOf(query) > -1;
-            });
-        }
-    }
-}

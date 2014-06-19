@@ -8,10 +8,6 @@ var indexModel = {
 };
 
 // TEMP:
-var fwy = TrainNotifier.XCityBrum.StationHelper.findStationByCRSCode("FWY");
-fwy.isFavourite(true);
-favouriteStations.push(TrainNotifier.XCityBrum.StationHelper.findStationByCRSCode("FWY"));
-
 nearestStations.push(TrainNotifier.XCityBrum.StationHelper.findStationByCRSCode("FWY"));
 nearestStations.push(TrainNotifier.XCityBrum.StationHelper.findStationByCRSCode("BHM"));
 

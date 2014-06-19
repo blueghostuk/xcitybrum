@@ -56,11 +56,61 @@
                     this.isFavourite(true);
                     favouriteStations.push(this);
                 }
-                return false;
+                Storage.setStationFavourites(favouriteStations());
             };
             return Station;
         })();
         XCityBrum.Station = Station;
+
+        var StationHelper = (function () {
+            function StationHelper() {
+            }
+            StationHelper.findStationByCRSCode = function (crsCode) {
+                crsCode = crsCode.toUpperCase();
+                return _.find(allStations, function (station) {
+                    return station.crsCode == crsCode;
+                });
+            };
+
+            StationHelper.searchStations = function (query) {
+                query = query.toUpperCase();
+
+                return allStations.filter(function (station) {
+                    return station.crsCode.toUpperCase().indexOf(query) > -1 || station.name.toUpperCase().indexOf(query) > -1 || station.fullName.toUpperCase().indexOf(query) > -1;
+                });
+            };
+            return StationHelper;
+        })();
+        XCityBrum.StationHelper = StationHelper;
+
+        var Storage = (function () {
+            function Storage() {
+            }
+            Storage.getFavouriteStations = function () {
+                var favs = new Array();
+                var storageValue = localStorage.getItem("fav-stations");
+                if (storageValue) {
+                    var crsCodes = storageValue.split(",");
+                    for (var i = 0; i < crsCodes.length; i++) {
+                        var station = StationHelper.findStationByCRSCode(crsCodes[i]);
+                        if (station) {
+                            station.isFavourite(true);
+                            favs.push(station);
+                        }
+                    }
+                }
+                return favs;
+            };
+
+            Storage.setStationFavourites = function (stations) {
+                var crsCodes = stations.map(function (station) {
+                    return station.crsCode;
+                });
+                localStorage.setItem("fav-stations", crsCodes.join(","));
+            };
+            return Storage;
+        })();
+        XCityBrum.Storage = Storage;
     })(TrainNotifier.XCityBrum || (TrainNotifier.XCityBrum = {}));
     var XCityBrum = TrainNotifier.XCityBrum;
 })(TrainNotifier || (TrainNotifier = {}));
