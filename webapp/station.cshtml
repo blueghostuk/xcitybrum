@@ -10,7 +10,7 @@
     <header class="bar bar-nav">
         <a class="icon icon-left-nav pull-left" href="~/index" data-transition="slide-out"></a>
         <a class="icon icon-refresh pull-right"></a>
-        <h1 class="title">X City Brum: Five Ways</h1>
+        <h1 class="title">X City Brum: <span id="app-station-title" data-bind="text: name"></span></h1>
     </header>
 }
 <div class="card">
@@ -58,4 +58,10 @@
             <span class="tab-label">Settings</span>
         </a>
     </nav>
+}
+
+@section AdditionalJs{
+    <script type="text/javascript">
+        var loadedPage = pages.station;
+    </script>
 }

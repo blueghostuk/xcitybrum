@@ -4,8 +4,16 @@
     station: "XCity Brum: Station"
 };
 
+$(function () {
+    switchPage(loadedPage);
+});
+
 window.addEventListener('push', function (e) {
-    switch (e.detail.state.title) {
+    switchPage(e.detail.state.title);
+});
+
+function switchPage(page) {
+    switch (page) {
         case pages.index:
             loadIndex();
             break;
@@ -14,7 +22,8 @@ window.addEventListener('push', function (e) {
             break;
 
         case pages.station:
+            loadStation();
             break;
     }
-});
+}
 //# sourceMappingURL=global.js.map

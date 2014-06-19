@@ -169,7 +169,8 @@
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\app\global.ts" />
     <TypeScriptCompile Include="Scripts\app\globalKnockout.ts" />
-    <TypeScriptCompile Include="Scripts\app\index\index.ts" />
+    <TypeScriptCompile Include="Scripts\app\pages\index.ts" />
+    <TypeScriptCompile Include="Scripts\app\pages\station.ts" />
     <TypeScriptCompile Include="Scripts\app\lib.ts" />
     <TypeScriptCompile Include="Scripts\app\stations.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />

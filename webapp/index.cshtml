@@ -74,8 +74,8 @@
     </nav>
 }
 
-@using System.Web.Optimization;
-
 @section AdditionalJs{
-    @Scripts.Render("~/bundles/app-index")
+    <script type="text/javascript">
+        var loadedPage = pages.index;
+    </script>
 }

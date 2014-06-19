@@ -12,8 +12,6 @@ nearestStations.push(TrainNotifier.XCityBrum.StationHelper.findStationByCRSCode(
 nearestStations.push(TrainNotifier.XCityBrum.StationHelper.findStationByCRSCode("BHM"));
 
 $(function () {
-    loadIndex();
-
     $("#app-index-station-search").on('keyup', function (e) {
         var code = e.keyCode || e.which;
         if (code == 13) {

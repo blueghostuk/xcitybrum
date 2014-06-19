@@ -32,8 +32,9 @@ namespace webapp.App_Start
                 "~/Scripts/app/globalKnockout.js",
                 "~/Scripts/app/global.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/app-index").Include(
-                "~/Scripts/app/index/index.js"));
+            bundles.Add(new ScriptBundle("~/bundles/app-pages").Include(
+                "~/Scripts/app/pages/index.js",
+                "~/Scripts/app/pages/station.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/ratchet.css",
