@@ -11,7 +11,11 @@ var indexModel = {
 nearestStations.push(TrainNotifier.XCityBrum.StationHelper.findStationByCRSCode("FWY"));
 nearestStations.push(TrainNotifier.XCityBrum.StationHelper.findStationByCRSCode("BHM"));
 
-$(function () {
+function loadIndex() {
+    stationSearchResults.removeAll();
+    ko.applyBindings(indexModel, $("#app-index")[0]);
+
+    $("#app-index-station-search").unbind();
     $("#app-index-station-search").on('keyup', function (e) {
         var code = e.keyCode || e.which;
         if (code == 13) {
@@ -20,10 +24,6 @@ $(function () {
         }
         updateSearchResults($(this).val());
     });
-});
-
-function loadIndex() {
-    ko.applyBindings(indexModel, $("#app-index")[0]);
 }
 
 function updateSearchResults(query) {
