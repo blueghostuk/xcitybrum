@@ -30,7 +30,8 @@ namespace webapp.App_Start
                 "~/Scripts/app/lib.js",
                 "~/Scripts/app/stations.js",
                 "~/Scripts/app/globalKnockout.js",
-                "~/Scripts/app/global.js"));
+                "~/Scripts/app/global.js",
+                "~/Scripts/app/webApi.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/app-pages").Include(
                 "~/Scripts/app/pages/index.js",
