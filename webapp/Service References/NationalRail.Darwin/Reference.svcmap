@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="03111f27-a71b-4deb-8c1c-5844f0be0449" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://lite.realtime.nationalrail.co.uk/ldbws/wsdl.aspx" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="RTTI_2012-01-13_ldb_types.xsd" MetadataType="Schema" ID="21da281a-3e11-48d7-b531-089dd9c1bae2" SourceId="1" SourceUrl="http://lite.realtime.nationalrail.co.uk/ldbws/rtti_2012-01-13_ldb_types.xsd" />
+    <MetadataFile FileName="rtti_2012-01-13_ldb.wsdl" MetadataType="Wsdl" ID="38ea8f68-0edc-4a63-9ebf-3394fef600d8" SourceId="1" SourceUrl="http://lite.realtime.nationalrail.co.uk/ldbws/rtti_2012-01-13_ldb.wsdl" />
+    <MetadataFile FileName="RTTI_2010-11-01_ldb_common_types.xsd" MetadataType="Schema" ID="db104093-1991-42ef-af49-015ca0dc97ee" SourceId="1" SourceUrl="http://lite.realtime.nationalrail.co.uk/ldbws/rtti_2010-11-01_ldb_common_types.xsd" />
+    <MetadataFile FileName="RTTI_2007-10-10_ldb_common_types.xsd" MetadataType="Schema" ID="67c2cf59-9fbe-40a7-a46a-4eda37eabf74" SourceId="1" SourceUrl="http://lite.realtime.nationalrail.co.uk/ldbws/rtti_2007-10-10_ldb_common_types.xsd" />
+    <MetadataFile FileName="wsdl.wsdl" MetadataType="Wsdl" ID="82d548dc-bd33-4c9e-8e5f-5213660fcac0" SourceId="1" SourceUrl="http://lite.realtime.nationalrail.co.uk/ldbws/wsdl.aspx" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
