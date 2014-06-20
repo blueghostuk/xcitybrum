@@ -36,8 +36,7 @@ module TrainNotifier.XCityBrum {
 
         public isFavourite = ko.observable(false);
 
-        constructor(public crsCode: string, public name: string, public latLng: GeoLocation, public fullName: string = "") {
-
+        constructor(public crsCode: string, public name: string, public nextCrs:string, public latLng: GeoLocation, public fullName: string = "") {
             var self = this;
             this.starClass = ko.computed(function () {
                 return self.isFavourite() ? "icon-star-filled" : "icon-star";

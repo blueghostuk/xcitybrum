@@ -36,10 +36,11 @@
         XCityBrum.Train = Train;
 
         var Station = (function () {
-            function Station(crsCode, name, latLng, fullName) {
+            function Station(crsCode, name, nextCrs, latLng, fullName) {
                 if (typeof fullName === "undefined") { fullName = ""; }
                 this.crsCode = crsCode;
                 this.name = name;
+                this.nextCrs = nextCrs;
                 this.latLng = latLng;
                 this.fullName = fullName;
                 this.isFavourite = ko.observable(false);
