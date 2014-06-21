@@ -16,13 +16,16 @@ interface TrainService {
     serviceIDField: string;
 }
 
-interface TrainLocation {
+interface TrainLocation extends CrsField {
     locationNameField: string;
-    crsField: string;
     viaField: string;
 }
 
-interface GetServiceDetailsResult {
+interface CrsField {
+    crsField: string;
+}
+
+interface GetServiceDetailsResult extends CrsField {
     isCancelledField: boolean;
     platformField: string;
     staField: string;
@@ -35,9 +38,7 @@ interface GetServiceDetailsResult {
     subsequentCallingPointsField: { callingPointField: CallingPoint[] }[];
 }
 
-interface CallingPoint {
-    locationNameField: string;
-    crsField: string;
+interface CallingPoint extends CrsField {
     stField: string;
     etField: string;
     atField: string;
