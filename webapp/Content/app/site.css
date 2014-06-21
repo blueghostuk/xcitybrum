@@ -1,2 +1,9 @@
-﻿body {
+﻿.table-view-cell.star {
+    padding-right: 15px !important;
+}
+.bold{
+    font-weight: bold;
+}
+.italic{
+    font-style: italic;
 }
