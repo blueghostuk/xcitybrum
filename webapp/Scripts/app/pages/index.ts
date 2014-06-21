@@ -12,7 +12,6 @@ var indexModel = {
 nearestStations.push(TrainNotifier.XCityBrum.StationHelper.findStationByCRSCode("FWY"));
 nearestStations.push(TrainNotifier.XCityBrum.StationHelper.findStationByCRSCode("BHM"));
 
-
 function loadIndex() {
     stationSearchResults.removeAll();
     ko.applyBindings(indexModel, $("#app-index")[0]);
