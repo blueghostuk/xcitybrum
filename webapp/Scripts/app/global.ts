@@ -1,6 +1,8 @@
 ﻿
 declare var loadedPage: string;
 
+var webApi: TrainNotifier.XCityBrum.WebApi; 
+
 var pages = {
     index: "XCity Brum",
     train: "XCity Brum: Train",
@@ -8,6 +10,7 @@ var pages = {
 };
 
 $(function () {
+    webApi = new TrainNotifier.XCityBrum.WebApi();
     switchPage(loadedPage);
 });
 
@@ -22,7 +25,7 @@ function switchPage(page: string) {
             break;
 
         case pages.train:
-
+            loadTrain();
             break;
 
         case pages.station:

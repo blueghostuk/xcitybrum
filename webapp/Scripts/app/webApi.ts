@@ -4,15 +4,15 @@
 }
 
 interface TrainService {
-    originField: TrainLocation;
-    destinationField: TrainLocation;
-    currentOriginsField: TrainLocation;
-    currentDestinationsField: TrainLocation;
+    originField: TrainLocation[];
+    destinationField: TrainLocation[];
+    currentOriginsField: TrainLocation[];
+    currentDestinationsField: TrainLocation[];
     staField: string;
     etaField: string;
     stdField: string;
     etdField: string;
-    platformField: number;
+    platformField: string;
     serviceIDField: string;
 }
 
@@ -24,15 +24,15 @@ interface TrainLocation {
 
 interface GetServiceDetailsResult {
     isCancelledField: boolean;
-    platformField: number;
+    platformField: string;
     staField: string;
     etaField: string;
     ataField: string;
     stdField: string;
     etdField: string;
     atdField: string;
-    previousCallingPointsField: { callingPointField: CallingPoint[] };
-    subsequentCallingPointsField: { callingPointField: CallingPoint[] };
+    previousCallingPointsField: { callingPointField: CallingPoint[] }[];
+    subsequentCallingPointsField: { callingPointField: CallingPoint[] }[];
 }
 
 interface CallingPoint {
@@ -41,4 +41,20 @@ interface CallingPoint {
     stField: string;
     etField: string;
     atField: string;
+}
+
+module TrainNotifier.XCityBrum {
+
+    export class WebApi {
+
+        getStationStatus(station: Station) {
+            return $.getJSON("api/station/" + station.crsCode + "/" + station.nextCrs);
+        }
+
+        getService(serviceId: string) {
+            return $.getJSON("api/services/", { serviceId: serviceId });
+        }
+
+    }
+
 }
