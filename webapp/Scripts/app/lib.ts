@@ -36,7 +36,7 @@ module TrainNotifier.XCityBrum {
 
         public isFavourite = ko.observable(false);
 
-        constructor(public crsCode: string, public name: string, public nextCrs:string, public latLng: GeoLocation, public fullName: string = "") {
+        constructor(public crsCode: string, public name: string, public nextCrs: string, public latLng: GeoLocation, public fullName: string = "") {
             var self = this;
             this.starClass = ko.computed(function () {
                 return self.isFavourite() ? "icon-star-filled" : "icon-star";
@@ -52,6 +52,87 @@ module TrainNotifier.XCityBrum {
                 favouriteStations.push(this);
             }
             Storage.setStationFavourites(favouriteStations());
+        }
+
+    }
+
+    export class StationResult {
+
+        public approachingTrains: TrainServiceResult[];
+        public recentTrains: TrainServiceResult[];
+
+        constructor(public station: Station, arrivals: GetArrivalDepartureBoardResult, departures: GetArrivalDepartureBoardResult) {
+            var arrivalTrains = arrivals.trainServicesField.map(function (arrival) {
+                return new TrainServiceResult(arrival);
+            });
+            var departureTrains = departures.trainServicesField.map(function (arrival) {
+                return new TrainServiceResult(arrival);
+            });
+
+            var allTrains = arrivalTrains.concat(departureTrains);
+
+            this.approachingTrains = allTrains.filter(function (t) {
+                return !t.isPast;
+            }).sort(function (a, b) {
+                    return a.expectedDeparture.isBefore(b.expectedDeparture) ? -1 : 1;
+                });
+            this.recentTrains = allTrains.filter(function (t) {
+                return t.isPast;
+            }).sort(function (a, b) {
+                    return a.expectedDeparture.isAfter(b.expectedDeparture) ? -1 : 1;
+                });
+        }
+
+    }
+
+    export class TrainServiceResult {
+
+        private static onTime = "on time";
+
+        public serviceId: string;
+        private platform: string;
+        private destination: string;
+        private plannedDeparture: Duration;
+        public expectedDeparture: Moment;
+
+        public isPast: boolean;
+
+        public displayString: string;
+
+        constructor(trainService: TrainService) {
+            this.serviceId = trainService.serviceIDField;
+            this.platform = trainService.platformField;
+            this.destination = StationHelper.findStationByCRSCode(trainService.destinationField[0].crsField).name;
+            this.plannedDeparture = moment.duration(trainService.stdField);
+            var expectedDeparture = trainService.etdField.toLowerCase() == TrainServiceResult.onTime ? trainService.stdField : trainService.etdField;
+
+            this.expectedDeparture = moment(expectedDeparture, "HH:mm");
+            this.isPast = this.expectedDeparture.isBefore(moment());
+
+            this.displayString = (this.platform ? "P" + this.platform + " " : "") + trainService.stdField + " to " + this.destination + (this.isPast ? " " : " due ") + this.expectedDeparture.fromNow();
+        }
+
+    }
+
+    export class TrainDetailsResult {
+
+        public title: string;
+        public headline: string;
+
+        public callingAt: string[];
+        public previousCallingPoints: string[];
+
+        constructor(trainDetails: GetServiceDetailsResult) {
+            var destination = _.last(trainDetails.subsequentCallingPointsField[0].callingPointField);
+
+            var destStation = StationHelper.findStationByCRSCode(destination.crsField);
+
+            this.title = trainDetails.stdField + " to " + destStation.name;
+
+            this.headline = "Due in 1 min";
+
+            this.callingAt = [];
+            this.previousCallingPoints = [];
         }
 
     }
@@ -99,6 +180,5 @@ module TrainNotifier.XCityBrum {
             });
             localStorage.setItem("fav-stations", crsCodes.join(","));
         }
-
     }
 }
