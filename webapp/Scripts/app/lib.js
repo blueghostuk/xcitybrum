@@ -78,13 +78,16 @@
                 this.approachingTrains = allTrains.filter(function (t) {
                     return !t.isPast;
                 }).sort(function (a, b) {
-                    return a.expectedDeparture.isBefore(b.expectedDeparture) ? -1 : 1;
+                    return a.departure.isBefore(b.departure) ? -1 : 1;
                 });
                 this.recentTrains = allTrains.filter(function (t) {
                     return t.isPast;
                 }).sort(function (a, b) {
-                    return a.expectedDeparture.isAfter(b.expectedDeparture) ? -1 : 1;
+                    return a.departure.isAfter(b.departure) ? -1 : 1;
                 });
+
+                this.approachingTrains = _.take(this.approachingTrains, 4);
+                this.recentTrains = _.take(this.recentTrains, 4);
             }
             return StationResult;
         })();
@@ -93,15 +96,17 @@
         var TrainServiceResult = (function () {
             function TrainServiceResult(trainService) {
                 this.serviceId = trainService.serviceIDField;
-                this.platform = trainService.platformField;
+                this.platform = trainService.platformField ? "P" + trainService.platformField : "";
                 this.destination = StationHelper.findStationByCRSCode(trainService.destinationField[0].crsField).name;
-                this.plannedDeparture = moment.duration(trainService.stdField);
-                var expectedDeparture = trainService.etdField.toLowerCase() == TrainServiceResult.onTime ? trainService.stdField : trainService.etdField;
 
-                this.expectedDeparture = moment(expectedDeparture, "HH:mm");
-                this.isPast = this.expectedDeparture.isBefore(moment());
+                // if terminates etdField is null
+                var expectedDeptField = trainService.etdField ? trainService.etdField : trainService.etaField;
+                var departureField = trainService.stdField ? trainService.stdField : trainService.staField;
 
-                this.displayString = (this.platform ? "P" + this.platform + " " : "") + trainService.stdField + " to " + this.destination + (this.isPast ? " " : " due ") + this.expectedDeparture.fromNow();
+                this.expectedDeparture = departureField;
+                this.departure = moment(expectedDeptField.toLowerCase() == TrainServiceResult.onTime ? departureField : expectedDeptField, "HH:mm");
+                this.isPast = this.departure.isBefore(moment());
+                this.due = this.departure.fromNow();
             }
             TrainServiceResult.onTime = "on time";
             return TrainServiceResult;
@@ -110,20 +115,80 @@
 
         var TrainDetailsResult = (function () {
             function TrainDetailsResult(trainDetails) {
-                var destination = _.last(trainDetails.subsequentCallingPointsField[0].callingPointField);
+                this.previousCrsCode = trainDetails.crsField;
+
+                var destination = trainDetails.subsequentCallingPointsField.length > 0 ? _.last(trainDetails.subsequentCallingPointsField[0].callingPointField) : trainDetails;
 
                 var destStation = StationHelper.findStationByCRSCode(destination.crsField);
 
-                this.title = trainDetails.stdField + " to " + destStation.name;
+                // if terminates then use sta
+                this.title = (trainDetails.stdField ? trainDetails.stdField : trainDetails.staField) + " to " + destStation.name;
 
-                this.headline = "Due in 1 min";
+                // sometimes estimate is null ???
+                var etaField = trainDetails.etaField ? trainDetails.etaField : trainDetails.staField;
 
-                this.callingAt = [];
-                this.previousCallingPoints = [];
+                var expectedArrival = moment((etaField.toLowerCase() == TrainDetailsResult.onTime ? trainDetails.staField : etaField), "HH:mm");
+
+                var isPast = expectedArrival.isBefore(moment());
+
+                this.headline = (isPast ? "Arrived " : "Due ") + expectedArrival.fromNow() + (trainDetails.platformField ? " on P" + trainDetails.platformField : "");
+
+                this.previousCallingPoints = trainDetails.previousCallingPointsField[0].callingPointField.sort(function (a, b) {
+                    return moment(a.stField, "HH:mm").isBefore(moment(b.stField, "HH:mm")) ? 1 : -1;
+                }).map(function (cp) {
+                    var station = StationHelper.findStationByCRSCode(cp.crsField);
+                    var completed = cp.atField != null;
+                    var diffField = completed ? cp.atField : cp.etField;
+                    var difference = diffField.toLowerCase() == TrainDetailsResult.onTime ? 0 : moment(diffField, "HH:mm").diff(moment(cp.stField, "HH:mm"), "minutes");
+
+                    return new TrainDetailsStop(station.name, (diffField.toLowerCase() == TrainDetailsResult.onTime ? cp.stField : diffField), completed, difference);
+                });
+
+                if (trainDetails.subsequentCallingPointsField.length > 0) {
+                    this.callingAt = trainDetails.subsequentCallingPointsField[0].callingPointField.sort(function (a, b) {
+                        return moment(a.stField, "HH:mm").isBefore(moment(b.stField, "HH:mm")) ? -1 : 1;
+                    }).map(function (cp) {
+                        var station = StationHelper.findStationByCRSCode(cp.crsField);
+                        var completed = cp.atField != null;
+                        var diffField = completed ? cp.atField : cp.etField;
+                        var difference = diffField.toLowerCase() == TrainDetailsResult.onTime ? 0 : moment(diffField, "HH:mm").diff(moment(cp.stField, "HH:mm"), "minutes");
+
+                        return new TrainDetailsStop(station.name, (diffField.toLowerCase() == TrainDetailsResult.onTime ? cp.stField : diffField), completed, difference);
+                    });
+                } else {
+                    this.callingAt = [];
+                }
             }
+            TrainDetailsResult.onTime = "on time";
             return TrainDetailsResult;
         })();
         XCityBrum.TrainDetailsResult = TrainDetailsResult;
+
+        var TrainDetailsStop = (function () {
+            function TrainDetailsStop(stationName, time, completed, delay) {
+                this.stationName = stationName;
+                this.time = time;
+                this.completed = completed;
+                if (time.toLowerCase() == TrainDetailsStop.noReport) {
+                    this.timeSuffixClass = "badge-primary";
+                    this.timeSuffix = "NA";
+                } else {
+                    if (delay < 0) {
+                        this.timeSuffixClass = "badge-positive";
+                        this.timeSuffix = delay.toString();
+                    } else if (delay > 0) {
+                        this.timeSuffixClass = "badge-negative";
+                        this.timeSuffix = "+" + delay.toString();
+                    } else {
+                        this.timeSuffixClass = null;
+                        this.timeSuffix = "RT";
+                    }
+                }
+            }
+            TrainDetailsStop.noReport = "no report";
+            return TrainDetailsStop;
+        })();
+        XCityBrum.TrainDetailsStop = TrainDetailsStop;
 
         var StationHelper = (function () {
             function StationHelper() {
