@@ -8,49 +8,22 @@
 
 @section NavBar{
     <header class="bar bar-nav">
-        <a class="icon icon-left-nav pull-left" href="~/station#fwy" data-transition="slide-out"></a>
+        <a class="icon icon-left-nav pull-left" href="~/station#!fwy" data-transition="slide-out"></a>
         <a class="icon icon-refresh pull-right"></a>
-        <h1 class="title">19:59 Five Ways to Longbridge</h1>
+        <h1 class="title" id="app-train-title" data-bind="text: title"></h1>
     </header>
 }
-<div class="card">
+<div class="card" id="app-train-card">
     <ul class="table-view">
-        <li class="table-view-cell table-view-divider">Due in 1 minute on Platform 1</li>
+        <li class="table-view-cell table-view-divider" data-bind="text: headline"></li>
         <li class="table-view-cell table-view-divider">Calling At</li>
-        <li class="table-view-cell">
-            P2 University at 20:00
-        </li>
-        <li class="table-view-cell">
-            Selly Oak at 20:02
-        </li>
-        <li class="table-view-cell">
-            Bournville at 20:05
-        </li>
-        <li class="table-view-cell">
-            Kings Norton at 20:07
-        </li>
-        <li class="table-view-cell">
-            Northfield at 20:10
-        </li>
-        <li class="table-view-cell">
-            P2 Longbridge at 20:14
-        </li>
+        <!-- ko foreach: approachingTrains -->
+        <li class="table-view-cell" data-bind="text: $data"></li>
+        <!-- /ko -->
         <li class="table-view-cell table-view-divider">Previous Calling Points</li>
-        <li class="table-view-cell">
-            P11 Birmingham New Street at 19:53 (on time)
-        </li>
-        <li class="table-view-cell">
-            P2 Aston at 19:13 (3 min early)
-        </li>
-        <li class="table-view-cell">
-            Gravelly Hill at 19:39 (2 min early)
-        </li>
-        <li class="table-view-cell">
-            Erdington at 19:36 (2 min early)
-        </li>
-        <li class="table-view-cell">
-            Chester Road at 19:35 (1 min early)
-        </li>
+        <!-- ko foreach: previousCallingPoints -->
+        <li class="table-view-cell" data-bind="text: $data"></li>
+        <!-- /ko -->
     </ul>
 </div>
 
@@ -77,4 +50,10 @@
             <span class="tab-label">Settings</span>
         </a>
     </nav>
+}
+
+@section AdditionalJs{
+    <script type="text/javascript">
+        var loadedPage = pages.train;
+    </script>
 }
