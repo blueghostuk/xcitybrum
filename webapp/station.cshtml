@@ -18,13 +18,33 @@
         <li class="table-view-cell table-view-divider">Approaching Trains</li>
         <!-- ko foreach: approachingTrains -->
         <li class="table-view-cell">
-            <a class="navigate-right" data-transition="slide-in" data-bind="attr: { href: '/train#!' + serviceId }, text: displayString"></a>
+            <a class="navigate-right" data-transition="slide-in" data-bind="attr: { href: '/train#!' + serviceId }">
+                <span class="media-object pull-right">
+                    <span data-bind="text: due"></span>
+                    on
+                    <span data-bind="text: platform"></span>
+                </span>
+                <div class="media-body">
+                    <span data-bind="text: expectedDeparture"></span>&nbsp;to
+                    <span data-bind="text: destination"></span>
+                </div>
+            </a>
         </li>
         <!-- /ko -->
         <li class="table-view-cell table-view-divider">Recent Trains</li>
         <!-- ko foreach: recentTrains -->
         <li class="table-view-cell">
-            <a class="navigate-right" data-transition="slide-in" data-bind="attr: { href: '/train#!' + serviceId }, text: displayString"></a>
+            <a class="navigate-right" data-transition="slide-in" data-bind="attr: { href: '/train#!' + serviceId }">
+                <span class="media-object pull-right">
+                    <span data-bind="text: due"></span>
+                    on
+                    <span data-bind="text: platform"></span>
+                </span>
+                <div class="media-body">
+                    <span data-bind="text: expectedDeparture"></span>&nbsp;to
+                    <span data-bind="text: destination"></span>
+                </div>
+            </a>
         </li>
         <!-- /ko -->
     </ul>
@@ -32,25 +52,21 @@
 
 @section Footer{
     <nav class="bar bar-tab">
-        <a class="tab-item active" href="#">
+        <a class="tab-item" href="/">
             <span class="icon icon-home"></span>
             <span class="tab-label">Home</span>
         </a>
-        <a class="tab-item" href="#">
-            <span class="icon icon-person"></span>
-            <span class="tab-label">Profile</span>
-        </a>
-        <a class="tab-item" href="#">
+        <a class="tab-item" href="/favourites">
             <span class="icon icon-star-filled"></span>
-            <span class="tab-label">Favorites</span>
+            <span class="tab-label">Favourites</span>
         </a>
-        <a class="tab-item" href="#">
-            <span class="icon icon-search"></span>
-            <span class="tab-label">Search</span>
-        </a>
-        <a class="tab-item" href="#">
+        <a class="tab-item" href="/settings">
             <span class="icon icon-gear"></span>
             <span class="tab-label">Settings</span>
+        </a>
+        <a class="tab-item" href="/about">
+            <span class="icon icon-info"></span>
+            <span class="tab-label">About</span>
         </a>
     </nav>
 }
