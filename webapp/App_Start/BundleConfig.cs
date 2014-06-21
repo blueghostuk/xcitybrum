@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Optimization;
 
 namespace webapp.App_Start
@@ -40,7 +41,7 @@ namespace webapp.App_Start
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/ratchet.css",
-                "~/Content/ratchet-theme-ios.css",
+                "~/Content/ratchet-theme-" + WebConfigurationManager.AppSettings["target"] + ".css",
                 "~/Content/app/site.css"));
         }
     }
