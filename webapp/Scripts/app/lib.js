@@ -66,12 +66,22 @@
         var StationResult = (function () {
             function StationResult(station, arrivals, departures) {
                 this.station = station;
-                var arrivalTrains = arrivals.trainServicesField.map(function (arrival) {
-                    return new TrainServiceResult(arrival);
-                });
-                var departureTrains = departures.trainServicesField.map(function (arrival) {
-                    return new TrainServiceResult(arrival);
-                });
+                var arrivalTrains;
+                if (arrivals.trainServicesField) {
+                    arrivalTrains = arrivals.trainServicesField.map(function (arrival) {
+                        return new TrainServiceResult(arrival);
+                    });
+                } else {
+                    arrivalTrains = [];
+                }
+                var departureTrains;
+                if (departures.trainServicesField) {
+                    var departureTrains = departures.trainServicesField.map(function (arrival) {
+                        return new TrainServiceResult(arrival);
+                    });
+                } else {
+                    departureTrains = [];
+                }
 
                 var allTrains = arrivalTrains.concat(departureTrains);
 

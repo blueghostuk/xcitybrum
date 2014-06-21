@@ -62,12 +62,22 @@ module TrainNotifier.XCityBrum {
         public recentTrains: TrainServiceResult[];
 
         constructor(public station: Station, arrivals: GetArrivalDepartureBoardResult, departures: GetArrivalDepartureBoardResult) {
-            var arrivalTrains = arrivals.trainServicesField.map(function (arrival) {
-                return new TrainServiceResult(arrival);
-            });
-            var departureTrains = departures.trainServicesField.map(function (arrival) {
-                return new TrainServiceResult(arrival);
-            });
+            var arrivalTrains: TrainServiceResult[];
+            if (arrivals.trainServicesField) {
+                arrivalTrains = arrivals.trainServicesField.map(function (arrival) {
+                    return new TrainServiceResult(arrival);
+                });
+            } else {
+                arrivalTrains = [];
+            }
+            var departureTrains: TrainServiceResult[];
+            if (departures.trainServicesField) {
+                var departureTrains = departures.trainServicesField.map(function (arrival) {
+                    return new TrainServiceResult(arrival);
+                });
+            } else {
+                departureTrains = [];
+            }
 
             var allTrains = arrivalTrains.concat(departureTrains);
 
