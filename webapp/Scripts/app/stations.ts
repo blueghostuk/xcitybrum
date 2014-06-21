@@ -137,7 +137,13 @@ allStations.push(new TrainNotifier.XCityBrum.Station(
     { lat: 52, lng: 1 }));
 
 allStations.push(new TrainNotifier.XCityBrum.Station(
+    "ALV",
+    "Alvechurch",
+    "BTG",
+    { lat: 52, lng: 1 }));
+
+allStations.push(new TrainNotifier.XCityBrum.Station(
     "RDC",
     "Reddich",
-    "BTG",
+    "ALV",
     { lat: 52, lng: 1 }));
