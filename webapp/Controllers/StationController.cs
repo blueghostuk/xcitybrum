@@ -15,16 +15,19 @@ namespace webapp.Controllers
 
         [HttpGet]
         [Route("station/{crsCode}/{toCrsCode}")]
-        public async Task<IHttpActionResult> GetServices(string crsCode, string toCrsCode, bool to = true)
+        public async Task<IHttpActionResult> GetServices(string crsCode, string toCrsCode)
         {
             using (var darwin = new LDBServiceSoapClient())
             {
-                var result = await darwin.GetArrivalDepartureBoardAsync(DarwinToken, 4, crsCode, toCrsCode, to? FilterType.to : FilterType.from, timeOffset: -30, timeWindow: 30);
+                var toResult = darwin.GetArrivalDepartureBoardAsync(DarwinToken, 20, crsCode, toCrsCode, FilterType.to, -30, 60);
+                var fromResult = darwin.GetArrivalDepartureBoardAsync(DarwinToken, 20, crsCode, toCrsCode, FilterType.from, -30, 60);
 
-                if (result == null)
-                    return NotFound();
+                await Task.WhenAll(new[] { toResult, fromResult });
 
-                return Ok(result);
+                return Ok(new[] { 
+                    toResult.Result.GetArrivalDepartureBoardResult,
+                    fromResult.Result.GetArrivalDepartureBoardResult
+                });
             }
         }
 
@@ -39,7 +42,7 @@ namespace webapp.Controllers
                 if (result == null)
                     return NotFound();
 
-                return Ok(result);
+                return Ok(result.GetServiceDetailsResult);
             }
         }
 
