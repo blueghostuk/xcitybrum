@@ -8,7 +8,9 @@ var pages = {
 
 $(function () {
     webApi = new TrainNotifier.XCityBrum.WebApi();
-    switchPage(loadedPage);
+    if (typeof loadedPage != "undefined") {
+        switchPage(loadedPage);
+    }
 });
 
 window.addEventListener('push', function (e) {
