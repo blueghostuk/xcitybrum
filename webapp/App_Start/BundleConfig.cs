@@ -35,7 +35,8 @@ namespace webapp.App_Start
 
             bundles.Add(new ScriptBundle("~/bundles/app-pages").Include(
                 "~/Scripts/app/pages/index.js",
-                "~/Scripts/app/pages/station.js"));
+                "~/Scripts/app/pages/station.js",
+                "~/Scripts/app/pages/train.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/ratchet.css",
