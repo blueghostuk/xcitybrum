@@ -138,6 +138,8 @@
     <Content Include="Scripts\knockout-3.1.0.js" />
     <Content Include="Scripts\underscore-min.js" />
     <Content Include="Scripts\underscore.js" />
+    <Content Include="about.cshtml" />
+    <Content Include="favourites.cshtml" />
     <None Include="Service References\NationalRail.Darwin\configuration91.svcinfo" />
     <None Include="Service References\NationalRail.Darwin\configuration.svcinfo" />
     <None Include="Service References\NationalRail.Darwin\Reference.svcmap">
@@ -178,6 +180,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Service References\NationalRail.Darwin\wsdl.wsdl" />
+    <Content Include="settings.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
