@@ -38,7 +38,8 @@
     }
   };
 
-  window.addEventListener('touchend', function (event) {
+    // comment this out, not sure what its purpose is
+  /*window.addEventListener('touchend', function (event) {
     var modal = getModal(event);
     if (modal) {
       if (modal && modal.classList.contains('modal')) {
@@ -46,7 +47,7 @@
       }
       event.preventDefault(); // prevents rewriting url (apps can still use hash values in url)
     }
-  });
+  });*/
 }());
 
 /* ========================================================================
