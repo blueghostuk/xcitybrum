@@ -10,28 +10,23 @@
     <header class="bar bar-nav">
         <a class="icon icon-left-nav pull-left" href="~/index" data-transition="slide-out"></a>
         <a class="icon icon-refresh pull-right"></a>
-        <h1 class="title">X City Brum: <span id="app-station-title" data-bind="text: name"></span></h1>
+        <h1 class="title">X City Brum: <span id="app-station-title" data-bind="text: station.name"></span></h1>
     </header>
 }
-<div class="card">
+<div class="card" id="app-station-card">
     <ul class="table-view">
         <li class="table-view-cell table-view-divider">Approaching Trains</li>
+        <!-- ko foreach: approachingTrains -->
         <li class="table-view-cell">
-            <a class="navigate-right" href="~/train#!P63646/2014/06/18" data-transition="slide-in">P2 19:56 to Longbridge due in 1 minute</a>
+            <a class="navigate-right" data-transition="slide-in" data-bind="attr: { href: '/train#!' + serviceId }, text: displayString"></a>
         </li>
-        <li class="table-view-cell">
-            <a class="navigate-right" href="~/train#!P63646/2014/06/18" data-transition="slide-in">P1 19:59 to Lichfield Trent Valley due in 2 minute</a>
-        </li>
-        <li class="table-view-cell">
-            <a class="navigate-right" href="~/train#!P63646/2014/06/18" data-transition="slide-in">P1 20:09 to Birmingham New Street due in 11 minute</a>
-        </li>
+        <!-- /ko -->
         <li class="table-view-cell table-view-divider">Recent Trains</li>
+        <!-- ko foreach: recentTrains -->
         <li class="table-view-cell">
-            <a class="navigate-right" href="~/train#!P63646/2014/06/18" data-transition="slide-in">P1 19:49 to Birmingham New Street 1 minute ago</a>
+            <a class="navigate-right" data-transition="slide-in" data-bind="attr: { href: '/train#!' + serviceId }, text: displayString"></a>
         </li>
-        <li class="table-view-cell">
-            <a class="navigate-right" href="~/train#!P63646/2014/06/18" data-transition="slide-in">P2 19:46 to Reddich due 2 minutes ago</a>
-        </li>
+        <!-- /ko -->
     </ul>
 </div>
 

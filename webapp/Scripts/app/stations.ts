@@ -1,7 +1,7 @@
 ﻿var allStations = new Array<TrainNotifier.XCityBrum.Station>();
 
 allStations.push(new TrainNotifier.XCityBrum.Station(
-    "LIF",
+    "LTV",
     "L'field T. Valley",
     "LIC",
     { lat: 52, lng: 1 },
@@ -10,7 +10,7 @@ allStations.push(new TrainNotifier.XCityBrum.Station(
 allStations.push(new TrainNotifier.XCityBrum.Station(
     "LIC",
     "L'field City",
-    "LIF",
+    "LTV",
     { lat: 52, lng: 1 },
     "Lichfield City"));
 
@@ -83,7 +83,8 @@ allStations.push(new TrainNotifier.XCityBrum.Station(
 allStations.push(new TrainNotifier.XCityBrum.Station(
     "BHM",
     "B'ham New St.",
-    "FWY,ERD", // to/from FWY and ERD
+    //"FWY,ERD", // to/from FWY and ERD
+    "FWY",
     { lat: 52, lng: 1 },
     "Birmingham New Street"));
 
@@ -133,4 +134,10 @@ allStations.push(new TrainNotifier.XCityBrum.Station(
     "BTG",
     "Barnt Green",
     "LOB",
+    { lat: 52, lng: 1 }));
+
+allStations.push(new TrainNotifier.XCityBrum.Station(
+    "RDC",
+    "Reddich",
+    "BTG",
     { lat: 52, lng: 1 }));
