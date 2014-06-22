@@ -140,8 +140,21 @@
                 var expectedArrival = moment((etaField.toLowerCase() == TrainDetailsResult.onTime ? (trainDetails.staField ? trainDetails.staField : trainDetails.stdField) : etaField), "HH:mm");
 
                 var isPast = expectedArrival.isBefore(moment());
-
                 this.headline = (isPast ? "Arrived " : "Due ") + expectedArrival.fromNow() + (trainDetails.platformField ? " on P" + trainDetails.platformField : "");
+
+                var completed = trainDetails.ataField != null;
+                var diffField = completed ? trainDetails.ataField : trainDetails.etaField;
+                var difference = diffField.toLowerCase() == TrainDetailsResult.onTime ? 0 : moment(diffField, "HH:mm").diff(moment(trainDetails.staField, "HH:mm"), "minutes");
+                if (difference > 0) {
+                    this.delay = "+" + difference;
+                    this.delayClass = "badge-negative";
+                } else if (difference < 0) {
+                    this.delay = difference.toString();
+                    this.delayClass = "badge-positive";
+                } else {
+                    this.delay = "RT";
+                    this.delayClass = null;
+                }
 
                 if (trainDetails.previousCallingPointsField.length > 0) {
                     this.previousCallingPoints = trainDetails.previousCallingPointsField[0].callingPointField.sort(function (a, b) {

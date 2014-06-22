@@ -84,13 +84,13 @@ module TrainNotifier.XCityBrum {
             this.approachingTrains = allTrains.filter(function (t) {
                 return !t.isPast;
             }).sort(function (a, b) {
-                return a.departure.isBefore(b.departure) ? -1 : 1;
+                    return a.departure.isBefore(b.departure) ? -1 : 1;
                 });
             this.recentTrains = allTrains.filter(function (t) {
                 return t.isPast;
             }).sort(function (a, b) {
-                return a.departure.isAfter(b.departure) ? -1 : 1;
-            });
+                    return a.departure.isAfter(b.departure) ? -1 : 1;
+                });
 
             this.approachingTrains = _.take(this.approachingTrains, 4);
             this.recentTrains = _.take(this.recentTrains, 4);
@@ -133,6 +133,8 @@ module TrainNotifier.XCityBrum {
 
         public title: string;
         public headline: string;
+        public delay: string;
+        public delayClass: string;
 
         public previousCrsCode: string;
 
@@ -142,7 +144,7 @@ module TrainNotifier.XCityBrum {
         constructor(trainDetails: GetServiceDetailsResult) {
             this.previousCrsCode = trainDetails.crsField;
 
-            var destination : CrsField = trainDetails.subsequentCallingPointsField.length > 0 ?
+            var destination: CrsField = trainDetails.subsequentCallingPointsField.length > 0 ?
                 _.last(trainDetails.subsequentCallingPointsField[0].callingPointField) : trainDetails;
 
             var destStation = StationHelper.findStationByCRSCode(destination.crsField);
@@ -158,8 +160,21 @@ module TrainNotifier.XCityBrum {
                 "HH:mm");
 
             var isPast = expectedArrival.isBefore(moment());
+            this.headline = (isPast ? "Arrived " : "Due ") + expectedArrival.fromNow() + (trainDetails.platformField ? " on P" + trainDetails.platformField : "");
 
-            this.headline = (isPast ? "Arrived " : "Due ") + expectedArrival.fromNow() + (trainDetails.platformField ? " on P" + trainDetails.platformField : "");                        
+            var completed = trainDetails.ataField != null;
+            var diffField = completed ? trainDetails.ataField : trainDetails.etaField;
+            var difference = diffField.toLowerCase() == TrainDetailsResult.onTime ? 0 : moment(diffField, "HH:mm").diff(moment(trainDetails.staField, "HH:mm"), "minutes");
+            if (difference > 0) {
+                this.delay = "+" + difference;
+                this.delayClass = "badge-negative";
+            } else if (difference < 0) {
+                this.delay = difference.toString();
+                this.delayClass = "badge-positive";
+            } else {
+                this.delay = "RT";
+                this.delayClass = null;
+            }
 
             if (trainDetails.previousCallingPointsField.length > 0) {
                 this.previousCallingPoints = trainDetails.previousCallingPointsField[0].callingPointField.sort(function (a, b) {

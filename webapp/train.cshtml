@@ -15,7 +15,10 @@
 }
 <div class="card" id="app-train-card">
     <ul class="table-view">
-        <li class="table-view-cell table-view-divider" data-bind="text: headline"></li>
+        <li class="table-view-cell table-view-divider">
+            <span data-bind="text: headline"></span>
+            <span class="pull-right badge" data-bind="text: delay, css: delayClass"></span>
+        </li>
         <li class="table-view-cell table-view-divider">Calling At</li>
         <!-- ko foreach: callingAt -->
         <li class="table-view-cell">
