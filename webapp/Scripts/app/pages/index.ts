@@ -8,11 +8,20 @@ var indexModel = {
     searchResults: stationSearchResults
 }
 
-// TEMP:
-nearestStations.push(TrainNotifier.XCityBrum.StationHelper.findStationByCRSCode("FWY"));
-nearestStations.push(TrainNotifier.XCityBrum.StationHelper.findStationByCRSCode("BHM"));
-
 function loadIndex() {
+    nearestStations.removeAll();
+    if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            var nearest = _.take(allStations.sort(function (a, b) {
+                var aDist = getDistanceFromLatLonInKm(position, a.latLng);
+                var bDist = getDistanceFromLatLonInKm(position, b.latLng);
+                return aDist > bDist ? 1 : -1;
+            }), 2);
+            for (var i = 0; i < nearest.length; i++) {
+                nearestStations.push(nearest[i]);
+            }
+        });
+    } // else geolocation IS NOT available
     stationSearchResults.removeAll();
     ko.applyBindings(indexModel, $("#app-index")[0]);
 
@@ -25,6 +34,25 @@ function loadIndex() {
         }
         updateSearchResults($(this).val());
     });
+}
+
+// http://stackoverflow.com/a/27943/117127
+function getDistanceFromLatLonInKm(position: Position, location: GeoLocation) {
+    var R = 6371; // Radius of the earth in km
+    var dLat = deg2rad(location.lat - position.coords.latitude);  // deg2rad below
+    var dLon = deg2rad(location.lng - position.coords.longitude);
+    var a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(deg2rad(position.coords.latitude)) * Math.cos(deg2rad(location.lat)) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2)
+    ;
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    var d = R * c; // Distance in km
+    return d;
+}
+
+function deg2rad(deg: number) {
+  return deg * (Math.PI / 180)
 }
 
 function updateSearchResults(query: string) {
