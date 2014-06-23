@@ -134,6 +134,7 @@
     <Content Include="bin\WebGrease.dll" />
     <Content Include="Content\images\poweredby.png" />
     <Content Include="packages.config" />
+    <Content Include="Scripts\fingerblast.js" />
     <Content Include="Scripts\knockout-3.1.0.debug.js" />
     <Content Include="Scripts\knockout-3.1.0.js" />
     <Content Include="Scripts\spin.js" />

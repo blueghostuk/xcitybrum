@@ -18,7 +18,8 @@ namespace webapp.App_Start
                 "~/Scripts/underscore.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/ratchet").Include(
-                "~/Scripts/ratchet.js"));
+                "~/Scripts/ratchet.js",
+                "~/Scripts/fingerblast.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/moment").Include(
                 "~/Scripts/moment.js"));
