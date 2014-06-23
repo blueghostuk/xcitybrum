@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Configuration;
+﻿using System.Web.Configuration;
 using System.Web.Optimization;
 
 namespace webapp.App_Start
@@ -26,6 +22,9 @@ namespace webapp.App_Start
 
             bundles.Add(new ScriptBundle("~/bundles/moment").Include(
                 "~/Scripts/moment.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/spin").Include(
+                "~/Scripts/spin.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
                 "~/Scripts/app/lib.js",

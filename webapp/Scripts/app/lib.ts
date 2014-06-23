@@ -125,7 +125,7 @@ module TrainNotifier.XCityBrum {
             this.departure = moment(expectedDeptField.toLowerCase() == TrainServiceResult.onTime ? departureField : expectedDeptField, "HH:mm");
             this.isPast = this.departure.isBefore(moment());
             this.due = this.departure.fromNow();
-                        
+
             var difference = expectedDeptField.toLowerCase() == TrainServiceResult.onTime ? 0 : moment(expectedDeptField, "HH:mm").diff(moment(departureField, "HH:mm"), "minutes");
             if (difference > 0) {
                 this.delay = "+" + difference;
@@ -147,6 +147,7 @@ module TrainNotifier.XCityBrum {
 
         public title: string;
         public headline: string;
+        public headlineCss: string = null;
         public delay: string;
         public delayClass: string;
 
@@ -163,29 +164,36 @@ module TrainNotifier.XCityBrum {
 
             var destStation = StationHelper.findStationByCRSCode(destination.crsField);
 
-            // if terminates then use sta
+            // if terminates then use sta            
             this.title = (trainDetails.stdField ? trainDetails.stdField : trainDetails.staField) + " to " + destStation.name;
-            var etaField = trainDetails.etaField ? trainDetails.etaField : trainDetails.staField ? trainDetails.staField : trainDetails.etdField ? trainDetails.etdField : trainDetails.stdField;
 
-            var expectedArrival = moment(
-                (etaField.toLowerCase() == TrainDetailsResult.onTime ? (trainDetails.staField ? trainDetails.staField : trainDetails.stdField) : etaField),
-                "HH:mm");
-
-            var isPast = expectedArrival.isBefore(moment());
-            this.headline = (isPast ? "Arrived " : "Due ") + expectedArrival.fromNow() + (trainDetails.platformField ? " on P" + trainDetails.platformField : "");
-
-            var completed = trainDetails.ataField != null;
-            var diffField = completed ? trainDetails.ataField : trainDetails.etaField;
-            var difference = diffField.toLowerCase() == TrainDetailsResult.onTime ? 0 : moment(diffField, "HH:mm").diff(moment(trainDetails.staField, "HH:mm"), "minutes");
-            if (difference > 0) {
-                this.delay = "+" + difference;
-                this.delayClass = "badge-negative";
-            } else if (difference < 0) {
-                this.delay = difference.toString();
-                this.delayClass = "badge-positive";
-            } else {
-                this.delay = "RT";
+            if (trainDetails.isCancelledField) {
+                this.headline = "Cancelled" + trainDetails.disruptionReasonField ? trainDetails.disruptionReasonField : "";
+                this.delay = null;
                 this.delayClass = null;
+                this.headlineCss = "star badge-negative";
+            } else {
+                var etaField = trainDetails.etaField ? trainDetails.etaField : trainDetails.staField ? trainDetails.staField : trainDetails.etdField ? trainDetails.etdField : trainDetails.stdField;
+                var expectedArrival = moment(
+                    (etaField.toLowerCase() == TrainDetailsResult.onTime ? (trainDetails.staField ? trainDetails.staField : trainDetails.stdField) : etaField),
+                    "HH:mm");
+
+                var isPast = expectedArrival.isBefore(moment());
+                this.headline = (isPast ? "Arrived " : "Due ") + expectedArrival.fromNow() + (trainDetails.platformField ? " on P" + trainDetails.platformField : "");
+
+                var completed = trainDetails.ataField != null;
+                var diffField = completed ? trainDetails.ataField : trainDetails.etaField;
+                var difference = diffField.toLowerCase() == TrainDetailsResult.onTime ? 0 : moment(diffField, "HH:mm").diff(moment(trainDetails.staField, "HH:mm"), "minutes");
+                if (difference > 0) {
+                    this.delay = "+" + difference;
+                    this.delayClass = "badge-negative";
+                } else if (difference < 0) {
+                    this.delay = difference.toString();
+                    this.delayClass = "badge-positive";
+                } else {
+                    this.delay = "RT";
+                    this.delayClass = null;
+                }
             }
 
             if (trainDetails.previousCallingPointsField.length > 0) {
@@ -223,6 +231,7 @@ module TrainNotifier.XCityBrum {
     export class TrainDetailsStop {
 
         private static noReport = "no report";
+        private static cancelled = "cancelled";
 
         public timeSuffixClass: string;
         public timeSuffix: string;
@@ -231,6 +240,10 @@ module TrainNotifier.XCityBrum {
             if (time.toLowerCase() == TrainDetailsStop.noReport) {
                 this.timeSuffixClass = "badge-primary";
                 this.timeSuffix = "NA";
+            } else if (time.toLowerCase() == TrainDetailsStop.cancelled) {
+                this.timeSuffixClass = "badge-negative";
+                this.timeSuffix = "Cancelled";
+                this.time = null;
             } else {
                 if (delay < 0) {
                     this.timeSuffixClass = "badge-positive";

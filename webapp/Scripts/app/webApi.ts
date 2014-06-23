@@ -27,6 +27,7 @@ interface CrsField {
 
 interface GetServiceDetailsResult extends CrsField {
     isCancelledField: boolean;
+    disruptionReasonField: string;
     platformField: string;
     staField: string;
     etaField: string;

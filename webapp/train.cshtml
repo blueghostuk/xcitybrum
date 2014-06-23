@@ -9,15 +9,15 @@
 @section NavBar{
     <header class="bar bar-nav">
         <a class="icon icon-left-nav pull-left" id="app-train-link" data-bind="attr: { href: '/station#!' + previousCrsCode }" data-transition="slide-out"></a>
-        <a class="icon icon-refresh pull-right"></a>
+        <a class="icon icon-refresh pull-right" id="app-refresh"></a>
         <h1 class="title" id="app-train-title" data-bind="text: title"></h1>
     </header>
 }
 <div class="card" id="app-train-card">
     <ul class="table-view">
-        <li class="table-view-cell table-view-divider">
+        <li class="table-view-cell table-view-divider" data-bind="css: headlineCss">
             <span data-bind="text: headline"></span>
-            <span class="pull-right badge" data-bind="text: delay, css: delayClass"></span>
+            <span class="pull-right badge" data-bind="visible: delay, text: delay, css: delayClass"></span>
         </li>
         <li class="table-view-cell table-view-divider">Calling At</li>
         <!-- ko foreach: callingAt -->

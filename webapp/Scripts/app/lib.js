@@ -137,6 +137,7 @@
 
         var TrainDetailsResult = (function () {
             function TrainDetailsResult(trainDetails) {
+                this.headlineCss = null;
                 this.previousCrsCode = trainDetails.crsField;
 
                 var destination = trainDetails.subsequentCallingPointsField.length > 0 ? _.last(trainDetails.subsequentCallingPointsField[0].callingPointField) : trainDetails;
@@ -145,25 +146,32 @@
 
                 // if terminates then use sta
                 this.title = (trainDetails.stdField ? trainDetails.stdField : trainDetails.staField) + " to " + destStation.name;
-                var etaField = trainDetails.etaField ? trainDetails.etaField : trainDetails.staField ? trainDetails.staField : trainDetails.etdField ? trainDetails.etdField : trainDetails.stdField;
 
-                var expectedArrival = moment((etaField.toLowerCase() == TrainDetailsResult.onTime ? (trainDetails.staField ? trainDetails.staField : trainDetails.stdField) : etaField), "HH:mm");
-
-                var isPast = expectedArrival.isBefore(moment());
-                this.headline = (isPast ? "Arrived " : "Due ") + expectedArrival.fromNow() + (trainDetails.platformField ? " on P" + trainDetails.platformField : "");
-
-                var completed = trainDetails.ataField != null;
-                var diffField = completed ? trainDetails.ataField : trainDetails.etaField;
-                var difference = diffField.toLowerCase() == TrainDetailsResult.onTime ? 0 : moment(diffField, "HH:mm").diff(moment(trainDetails.staField, "HH:mm"), "minutes");
-                if (difference > 0) {
-                    this.delay = "+" + difference;
-                    this.delayClass = "badge-negative";
-                } else if (difference < 0) {
-                    this.delay = difference.toString();
-                    this.delayClass = "badge-positive";
-                } else {
-                    this.delay = "RT";
+                if (trainDetails.isCancelledField) {
+                    this.headline = "Cancelled" + trainDetails.disruptionReasonField ? trainDetails.disruptionReasonField : "";
+                    this.delay = null;
                     this.delayClass = null;
+                    this.headlineCss = "star badge-negative";
+                } else {
+                    var etaField = trainDetails.etaField ? trainDetails.etaField : trainDetails.staField ? trainDetails.staField : trainDetails.etdField ? trainDetails.etdField : trainDetails.stdField;
+                    var expectedArrival = moment((etaField.toLowerCase() == TrainDetailsResult.onTime ? (trainDetails.staField ? trainDetails.staField : trainDetails.stdField) : etaField), "HH:mm");
+
+                    var isPast = expectedArrival.isBefore(moment());
+                    this.headline = (isPast ? "Arrived " : "Due ") + expectedArrival.fromNow() + (trainDetails.platformField ? " on P" + trainDetails.platformField : "");
+
+                    var completed = trainDetails.ataField != null;
+                    var diffField = completed ? trainDetails.ataField : trainDetails.etaField;
+                    var difference = diffField.toLowerCase() == TrainDetailsResult.onTime ? 0 : moment(diffField, "HH:mm").diff(moment(trainDetails.staField, "HH:mm"), "minutes");
+                    if (difference > 0) {
+                        this.delay = "+" + difference;
+                        this.delayClass = "badge-negative";
+                    } else if (difference < 0) {
+                        this.delay = difference.toString();
+                        this.delayClass = "badge-positive";
+                    } else {
+                        this.delay = "RT";
+                        this.delayClass = null;
+                    }
                 }
 
                 if (trainDetails.previousCallingPointsField.length > 0) {
@@ -209,6 +217,10 @@
                 if (time.toLowerCase() == TrainDetailsStop.noReport) {
                     this.timeSuffixClass = "badge-primary";
                     this.timeSuffix = "NA";
+                } else if (time.toLowerCase() == TrainDetailsStop.cancelled) {
+                    this.timeSuffixClass = "badge-negative";
+                    this.timeSuffix = "Cancelled";
+                    this.time = null;
                 } else {
                     if (delay < 0) {
                         this.timeSuffixClass = "badge-positive";
@@ -223,6 +235,7 @@
                 }
             }
             TrainDetailsStop.noReport = "no report";
+            TrainDetailsStop.cancelled = "cancelled";
             return TrainDetailsStop;
         })();
         XCityBrum.TrainDetailsStop = TrainDetailsStop;
