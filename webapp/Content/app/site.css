@@ -1,9 +1,19 @@
 ﻿.table-view-cell.star {
     padding-right: 15px !important;
 }
-.bold{
+
+.bold {
     font-weight: bold;
 }
-.italic{
+
+.italic {
     font-style: italic;
+}
+
+.smaller {
+    font-size: small;
+}
+
+.table-view-cell.train {
+    height: 60px;
 }

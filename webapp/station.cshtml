@@ -17,16 +17,18 @@
     <ul class="table-view">
         <li class="table-view-cell table-view-divider">Approaching Trains</li>
         <!-- ko foreach: approachingTrains -->
-        <li class="table-view-cell">
-            <a class="navigate-right" data-transition="slide-in" data-bind="attr: { href: '/train#!' + serviceId }">
-                <span class="media-object pull-right">
-                    <span data-bind="text: due"></span>
-                    on
-                    <span data-bind="text: platform"></span>
+        <li class="table-view-cell train">
+            <a class="navigate-right smaller" data-transition="slide-in" data-bind="attr: { href: '/train#!' + serviceId }">
+                <span class="media-object pull-right" style="vertical-align: middle;">
+                    <span data-bind="text: platform" class="platform"></span>
                 </span>
                 <div class="media-body">
-                    <span data-bind="text: expectedDeparture"></span>&nbsp;to
-                    <span data-bind="text: destination"></span>
+                    <b><span data-bind="text: expectedDeparture"></span></b>
+                    to
+                    <b><span data-bind="text: destination"></span></b>
+                    <br />
+                    <span data-bind="text: due"></span>
+                    <span class="badge" data-bind="text: delay, css: delayClass"></span>
                 </div>
             </a>
         </li>
@@ -34,15 +36,17 @@
         <li class="table-view-cell table-view-divider">Recent Trains</li>
         <!-- ko foreach: recentTrains -->
         <li class="table-view-cell">
-            <a class="navigate-right" data-transition="slide-in" data-bind="attr: { href: '/train#!' + serviceId }">
-                <span class="media-object pull-right">
-                    <span data-bind="text: due"></span>
-                    on
+            <a class="navigate-right smaller" data-transition="slide-in" data-bind="attr: { href: '/train#!' + serviceId }">
+                <span class="media-object pull-right" style="vertical-align: middle;">
                     <span data-bind="text: platform"></span>
                 </span>
                 <div class="media-body">
-                    <span data-bind="text: expectedDeparture"></span>&nbsp;to
-                    <span data-bind="text: destination"></span>
+                    <b><span data-bind="text: expectedDeparture"></span></b>
+                    to
+                    <b><span data-bind="text: destination"></span></b>
+                    <br />
+                    <span data-bind="text: due"></span>
+                    <span class="badge" data-bind="text: delay, css: delayClass"></span>
                 </div>
             </a>
         </li>

@@ -109,6 +109,8 @@ module TrainNotifier.XCityBrum {
         public departure: Moment;
         public due: string;
         public isPast: boolean;
+        public delay: string;
+        public delayClass: string;
 
         constructor(trainService: TrainService) {
             this.serviceId = trainService.serviceIDField;
@@ -123,6 +125,18 @@ module TrainNotifier.XCityBrum {
             this.departure = moment(expectedDeptField.toLowerCase() == TrainServiceResult.onTime ? departureField : expectedDeptField, "HH:mm");
             this.isPast = this.departure.isBefore(moment());
             this.due = this.departure.fromNow();
+                        
+            var difference = expectedDeptField.toLowerCase() == TrainServiceResult.onTime ? 0 : moment(expectedDeptField, "HH:mm").diff(moment(departureField, "HH:mm"), "minutes");
+            if (difference > 0) {
+                this.delay = "+" + difference;
+                this.delayClass = "badge-negative";
+            } else if (difference < 0) {
+                this.delay = difference.toString();
+                this.delayClass = "badge-positive";
+            } else {
+                this.delay = "RT";
+                this.delayClass = null;
+            }
         }
 
     }
@@ -151,8 +165,6 @@ module TrainNotifier.XCityBrum {
 
             // if terminates then use sta
             this.title = (trainDetails.stdField ? trainDetails.stdField : trainDetails.staField) + " to " + destStation.name;
-
-            // sometimes estimate is null ???
             var etaField = trainDetails.etaField ? trainDetails.etaField : trainDetails.staField ? trainDetails.staField : trainDetails.etdField ? trainDetails.etdField : trainDetails.stdField;
 
             var expectedArrival = moment(
