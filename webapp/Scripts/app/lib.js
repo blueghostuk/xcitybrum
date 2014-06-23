@@ -130,23 +130,30 @@
                 var departureField = trainService.stdField ? trainService.stdField : trainService.staField;
 
                 this.expectedDeparture = departureField;
-                this.departure = moment(expectedDeptField.toLowerCase() == TrainServiceResult.onTime ? departureField : expectedDeptField, "HH:mm");
+                this.departure = moment((expectedDeptField.toLowerCase() == TrainServiceResult.onTime || expectedDeptField.toLowerCase() == TrainServiceResult.cancelled) ? departureField : expectedDeptField, "HH:mm");
                 this.isPast = this.departure.isBefore(moment());
                 this.due = this.departure.fromNow();
 
-                var difference = expectedDeptField.toLowerCase() == TrainServiceResult.onTime ? 0 : moment(expectedDeptField, "HH:mm").diff(moment(departureField, "HH:mm"), "minutes");
-                if (difference > 0) {
-                    this.delay = "+" + difference;
+                if ((trainService.etaField && trainService.etaField.toLowerCase() == TrainServiceResult.cancelled) || trainService.etdField && trainService.etdField.toLowerCase() == TrainServiceResult.cancelled) {
+                    this.due = null;
                     this.delayClass = "badge-negative";
-                } else if (difference < 0) {
-                    this.delay = difference.toString();
-                    this.delayClass = "badge-positive";
+                    this.delay = "cancelled";
                 } else {
-                    this.delay = "RT";
-                    this.delayClass = null;
+                    var difference = expectedDeptField.toLowerCase() == TrainServiceResult.onTime ? 0 : moment(expectedDeptField, "HH:mm").diff(moment(departureField, "HH:mm"), "minutes");
+                    if (difference > 0) {
+                        this.delay = "+" + difference;
+                        this.delayClass = "badge-negative";
+                    } else if (difference < 0) {
+                        this.delay = difference.toString();
+                        this.delayClass = "badge-positive";
+                    } else {
+                        this.delay = "RT";
+                        this.delayClass = null;
+                    }
                 }
             }
             TrainServiceResult.onTime = "on time";
+            TrainServiceResult.cancelled = "cancelled";
             return TrainServiceResult;
         })();
         XCityBrum.TrainServiceResult = TrainServiceResult;
