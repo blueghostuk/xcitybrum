@@ -64,8 +64,20 @@
         XCityBrum.Station = Station;
 
         var StationResult = (function () {
-            function StationResult(station, arrivals, departures) {
-                this.station = station;
+            function StationResult() {
+                this.stationName = ko.observable(null);
+                this.approachingTrains = ko.observableArray();
+                this.recentTrains = ko.observableArray();
+            }
+            StationResult.prototype.clear = function () {
+                this.stationName(null);
+                this.approachingTrains.removeAll();
+                this.recentTrains.removeAll();
+            };
+
+            StationResult.prototype.update = function (station, arrivals, departures) {
+                this.stationName(station.name);
+
                 var arrivalTrains;
                 if (arrivals.trainServicesField) {
                     arrivalTrains = arrivals.trainServicesField.map(function (arrival) {
@@ -85,20 +97,24 @@
 
                 var allTrains = arrivalTrains.concat(departureTrains);
 
-                this.approachingTrains = allTrains.filter(function (t) {
+                this.approachingTrains.removeAll();
+                var approachingTrains = _.take(allTrains.filter(function (t) {
                     return !t.isPast;
                 }).sort(function (a, b) {
                     return a.departure.isBefore(b.departure) ? -1 : 1;
-                });
-                this.recentTrains = allTrains.filter(function (t) {
+                }), 4);
+                for (var i = 0; i < approachingTrains.length; i++)
+                    this.approachingTrains.push(approachingTrains[i]);
+
+                this.recentTrains.removeAll();
+                var recentTrains = _.take(allTrains.filter(function (t) {
                     return t.isPast;
                 }).sort(function (a, b) {
                     return a.departure.isAfter(b.departure) ? -1 : 1;
-                });
-
-                this.approachingTrains = _.take(this.approachingTrains, 4);
-                this.recentTrains = _.take(this.recentTrains, 4);
-            }
+                }), 4);
+                for (var i = 0; i < recentTrains.length; i++)
+                    this.recentTrains.push(recentTrains[i]);
+            };
             return StationResult;
         })();
         XCityBrum.StationResult = StationResult;
@@ -136,46 +152,68 @@
         XCityBrum.TrainServiceResult = TrainServiceResult;
 
         var TrainDetailsResult = (function () {
-            function TrainDetailsResult(trainDetails) {
-                this.headlineCss = null;
-                this.previousCrsCode = trainDetails.crsField;
+            function TrainDetailsResult() {
+                this.title = ko.observable(null);
+                this.headline = ko.observable(null);
+                this.headlineCss = ko.observable(null);
+                this.delay = ko.observable(null);
+                this.delayClass = ko.observable(null);
+                this.previousCrsCode = ko.observable(null);
+                this.callingAt = ko.observableArray();
+                this.previousCallingPoints = ko.observableArray();
+            }
+            TrainDetailsResult.prototype.clear = function () {
+                this.title(null);
+                this.headline(null);
+                this.headlineCss(null);
+                this.delay(null);
+                this.delayClass(null);
+                this.previousCrsCode(null);
+                this.callingAt.removeAll();
+                this.previousCallingPoints.removeAll();
+            };
+
+            TrainDetailsResult.prototype.update = function (trainDetails) {
+                this.previousCrsCode(trainDetails.crsField);
 
                 var destination = trainDetails.subsequentCallingPointsField.length > 0 ? _.last(trainDetails.subsequentCallingPointsField[0].callingPointField) : trainDetails;
 
                 var destStation = StationHelper.findStationByCRSCode(destination.crsField);
 
                 // if terminates then use sta
-                this.title = (trainDetails.stdField ? trainDetails.stdField : trainDetails.staField) + " to " + destStation.name;
+                this.title((trainDetails.stdField ? trainDetails.stdField : trainDetails.staField) + " to " + destStation.name);
 
                 if (trainDetails.isCancelledField) {
-                    this.headline = "Cancelled" + trainDetails.disruptionReasonField ? trainDetails.disruptionReasonField : "";
-                    this.delay = null;
-                    this.delayClass = null;
-                    this.headlineCss = "star badge-negative";
+                    this.headline("Cancelled" + trainDetails.disruptionReasonField ? trainDetails.disruptionReasonField : "");
+                    this.delay(null);
+                    this.delayClass(null);
+                    this.headlineCss("star badge-negative");
                 } else {
                     var etaField = trainDetails.etaField ? trainDetails.etaField : trainDetails.staField ? trainDetails.staField : trainDetails.etdField ? trainDetails.etdField : trainDetails.stdField;
                     var expectedArrival = moment((etaField.toLowerCase() == TrainDetailsResult.onTime ? (trainDetails.staField ? trainDetails.staField : trainDetails.stdField) : etaField), "HH:mm");
 
                     var isPast = expectedArrival.isBefore(moment());
-                    this.headline = (isPast ? "Arrived " : "Due ") + expectedArrival.fromNow() + (trainDetails.platformField ? " on P" + trainDetails.platformField : "");
+                    this.headline((isPast ? "Arrived " : "Due ") + expectedArrival.fromNow() + (trainDetails.platformField ? " on P" + trainDetails.platformField : ""));
 
                     var completed = trainDetails.ataField != null;
-                    var diffField = completed ? trainDetails.ataField : trainDetails.etaField;
-                    var difference = diffField.toLowerCase() == TrainDetailsResult.onTime ? 0 : moment(diffField, "HH:mm").diff(moment(trainDetails.staField, "HH:mm"), "minutes");
+                    var startsHere = trainDetails.etaField == null;
+                    var diffField = completed ? trainDetails.ataField : !startsHere ? trainDetails.etaField : trainDetails.etdField;
+                    var difference = diffField.toLowerCase() == TrainDetailsResult.onTime ? 0 : moment(diffField, "HH:mm").diff(moment(!startsHere ? trainDetails.staField : trainDetails.stdField, "HH:mm"), "minutes");
                     if (difference > 0) {
-                        this.delay = "+" + difference;
-                        this.delayClass = "badge-negative";
+                        this.delay("+" + difference);
+                        this.delayClass("badge-negative");
                     } else if (difference < 0) {
-                        this.delay = difference.toString();
-                        this.delayClass = "badge-positive";
+                        this.delay(difference.toString());
+                        this.delayClass("badge-positive");
                     } else {
-                        this.delay = "RT";
-                        this.delayClass = null;
+                        this.delay("RT");
+                        this.delayClass(null);
                     }
                 }
 
+                this.previousCallingPoints.removeAll();
                 if (trainDetails.previousCallingPointsField.length > 0) {
-                    this.previousCallingPoints = trainDetails.previousCallingPointsField[0].callingPointField.sort(function (a, b) {
+                    var previousCallingPoints = trainDetails.previousCallingPointsField[0].callingPointField.sort(function (a, b) {
                         return moment(a.stField, "HH:mm").isBefore(moment(b.stField, "HH:mm")) ? 1 : -1;
                     }).map(function (cp) {
                         var station = StationHelper.findStationByCRSCode(cp.crsField);
@@ -185,12 +223,14 @@
 
                         return new TrainDetailsStop(station.name, (diffField.toLowerCase() == TrainDetailsResult.onTime ? cp.stField : diffField), completed, difference);
                     });
-                } else {
-                    this.previousCallingPoints = [];
+                    for (var i = 0; i < previousCallingPoints.length; i++) {
+                        this.previousCallingPoints.push(previousCallingPoints[i]);
+                    }
                 }
 
+                this.callingAt.removeAll();
                 if (trainDetails.subsequentCallingPointsField.length > 0) {
-                    this.callingAt = trainDetails.subsequentCallingPointsField[0].callingPointField.sort(function (a, b) {
+                    var callingAt = trainDetails.subsequentCallingPointsField[0].callingPointField.sort(function (a, b) {
                         return moment(a.stField, "HH:mm").isBefore(moment(b.stField, "HH:mm")) ? -1 : 1;
                     }).map(function (cp) {
                         var station = StationHelper.findStationByCRSCode(cp.crsField);
@@ -200,10 +240,11 @@
 
                         return new TrainDetailsStop(station.name, (diffField.toLowerCase() == TrainDetailsResult.onTime ? cp.stField : diffField), completed, difference);
                     });
-                } else {
-                    this.callingAt = [];
+                    for (var i = 0; i < callingAt.length; i++) {
+                        this.callingAt.push(callingAt[i]);
+                    }
                 }
-            }
+            };
             TrainDetailsResult.onTime = "on time";
             return TrainDetailsResult;
         })();

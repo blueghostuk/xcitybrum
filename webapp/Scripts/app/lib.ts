@@ -58,10 +58,21 @@ module TrainNotifier.XCityBrum {
 
     export class StationResult {
 
-        public approachingTrains: TrainServiceResult[];
-        public recentTrains: TrainServiceResult[];
+        public stationName = ko.observable<string>(null);
+        public approachingTrains = ko.observableArray<TrainServiceResult>();
+        public recentTrains = ko.observableArray<TrainServiceResult>();
 
-        constructor(public station: Station, arrivals: GetArrivalDepartureBoardResult, departures: GetArrivalDepartureBoardResult) {
+        constructor() { }
+
+        clear() {
+            this.stationName(null);
+            this.approachingTrains.removeAll();
+            this.recentTrains.removeAll();
+        }
+
+        update(station: Station, arrivals: GetArrivalDepartureBoardResult, departures: GetArrivalDepartureBoardResult) {
+            this.stationName(station.name);
+
             var arrivalTrains: TrainServiceResult[];
             if (arrivals.trainServicesField) {
                 arrivalTrains = arrivals.trainServicesField.map(function (arrival) {
@@ -81,19 +92,23 @@ module TrainNotifier.XCityBrum {
 
             var allTrains = arrivalTrains.concat(departureTrains);
 
-            this.approachingTrains = allTrains.filter(function (t) {
+            this.approachingTrains.removeAll();
+            var approachingTrains = _.take(allTrains.filter(function (t) {
                 return !t.isPast;
             }).sort(function (a, b) {
                     return a.departure.isBefore(b.departure) ? -1 : 1;
-                });
-            this.recentTrains = allTrains.filter(function (t) {
+                }), 4);
+            for (var i = 0; i < approachingTrains.length; i++)
+                this.approachingTrains.push(approachingTrains[i]);
+
+            this.recentTrains.removeAll();
+            var recentTrains = _.take(allTrains.filter(function (t) {
                 return t.isPast;
             }).sort(function (a, b) {
                     return a.departure.isAfter(b.departure) ? -1 : 1;
-                });
-
-            this.approachingTrains = _.take(this.approachingTrains, 4);
-            this.recentTrains = _.take(this.recentTrains, 4);
+            }), 4);
+            for (var i = 0; i < recentTrains.length; i++)
+                this.recentTrains.push(recentTrains[i]);
         }
 
     }
@@ -145,19 +160,32 @@ module TrainNotifier.XCityBrum {
 
         private static onTime = "on time";
 
-        public title: string;
-        public headline: string;
-        public headlineCss: string = null;
-        public delay: string;
-        public delayClass: string;
+        public title = ko.observable<string>(null);
+        public headline = ko.observable<string>(null);
+        public headlineCss = ko.observable<string>(null);
+        public delay = ko.observable<string>(null);
+        public delayClass = ko.observable<string>(null);
 
-        public previousCrsCode: string;
+        public previousCrsCode = ko.observable<string>(null);
 
-        public callingAt: TrainDetailsStop[];
-        public previousCallingPoints: TrainDetailsStop[];
+        public callingAt = ko.observableArray<TrainDetailsStop>();
+        public previousCallingPoints = ko.observableArray<TrainDetailsStop>();
 
-        constructor(trainDetails: GetServiceDetailsResult) {
-            this.previousCrsCode = trainDetails.crsField;
+        constructor() { }
+
+        clear() {
+            this.title(null);
+            this.headline(null);
+            this.headlineCss(null);
+            this.delay(null);
+            this.delayClass(null);
+            this.previousCrsCode(null);
+            this.callingAt.removeAll();
+            this.previousCallingPoints.removeAll();
+        }
+
+        update(trainDetails: GetServiceDetailsResult) {
+            this.previousCrsCode(trainDetails.crsField);
 
             var destination: CrsField = trainDetails.subsequentCallingPointsField.length > 0 ?
                 _.last(trainDetails.subsequentCallingPointsField[0].callingPointField) : trainDetails;
@@ -165,13 +193,13 @@ module TrainNotifier.XCityBrum {
             var destStation = StationHelper.findStationByCRSCode(destination.crsField);
 
             // if terminates then use sta            
-            this.title = (trainDetails.stdField ? trainDetails.stdField : trainDetails.staField) + " to " + destStation.name;
+            this.title((trainDetails.stdField ? trainDetails.stdField : trainDetails.staField) + " to " + destStation.name);
 
             if (trainDetails.isCancelledField) {
-                this.headline = "Cancelled" + trainDetails.disruptionReasonField ? trainDetails.disruptionReasonField : "";
-                this.delay = null;
-                this.delayClass = null;
-                this.headlineCss = "star badge-negative";
+                this.headline("Cancelled" + trainDetails.disruptionReasonField ? trainDetails.disruptionReasonField : "");
+                this.delay(null);
+                this.delayClass(null);
+                this.headlineCss("star badge-negative");
             } else {
                 var etaField = trainDetails.etaField ? trainDetails.etaField : trainDetails.staField ? trainDetails.staField : trainDetails.etdField ? trainDetails.etdField : trainDetails.stdField;
                 var expectedArrival = moment(
@@ -179,25 +207,27 @@ module TrainNotifier.XCityBrum {
                     "HH:mm");
 
                 var isPast = expectedArrival.isBefore(moment());
-                this.headline = (isPast ? "Arrived " : "Due ") + expectedArrival.fromNow() + (trainDetails.platformField ? " on P" + trainDetails.platformField : "");
+                this.headline((isPast ? "Arrived " : "Due ") + expectedArrival.fromNow() + (trainDetails.platformField ? " on P" + trainDetails.platformField : ""));
 
                 var completed = trainDetails.ataField != null;
-                var diffField = completed ? trainDetails.ataField : trainDetails.etaField;
-                var difference = diffField.toLowerCase() == TrainDetailsResult.onTime ? 0 : moment(diffField, "HH:mm").diff(moment(trainDetails.staField, "HH:mm"), "minutes");
+                var startsHere = trainDetails.etaField == null;
+                var diffField = completed ? trainDetails.ataField : !startsHere ? trainDetails.etaField : trainDetails.etdField;
+                var difference = diffField.toLowerCase() == TrainDetailsResult.onTime ? 0 : moment(diffField, "HH:mm").diff(moment(!startsHere ? trainDetails.staField : trainDetails.stdField, "HH:mm"), "minutes");
                 if (difference > 0) {
-                    this.delay = "+" + difference;
-                    this.delayClass = "badge-negative";
+                    this.delay("+" + difference);
+                    this.delayClass("badge-negative");
                 } else if (difference < 0) {
-                    this.delay = difference.toString();
-                    this.delayClass = "badge-positive";
+                    this.delay(difference.toString());
+                    this.delayClass("badge-positive");
                 } else {
-                    this.delay = "RT";
-                    this.delayClass = null;
+                    this.delay("RT");
+                    this.delayClass(null);
                 }
             }
 
+            this.previousCallingPoints.removeAll();
             if (trainDetails.previousCallingPointsField.length > 0) {
-                this.previousCallingPoints = trainDetails.previousCallingPointsField[0].callingPointField.sort(function (a, b) {
+                var previousCallingPoints = trainDetails.previousCallingPointsField[0].callingPointField.sort(function (a, b) {
                     return moment(a.stField, "HH:mm").isBefore(moment(b.stField, "HH:mm")) ? 1 : -1;
                 }).map(function (cp) {
                         var station = StationHelper.findStationByCRSCode(cp.crsField);
@@ -206,13 +236,15 @@ module TrainNotifier.XCityBrum {
                         var difference = diffField.toLowerCase() == TrainDetailsResult.onTime ? 0 : moment(diffField, "HH:mm").diff(moment(cp.stField, "HH:mm"), "minutes");
 
                         return new TrainDetailsStop(station.name, (diffField.toLowerCase() == TrainDetailsResult.onTime ? cp.stField : diffField), completed, difference);
-                    });
-            } else {
-                this.previousCallingPoints = [];
+                });
+                for (var i = 0; i < previousCallingPoints.length; i++) {
+                    this.previousCallingPoints.push(previousCallingPoints[i]);
+                }
             }
 
+            this.callingAt.removeAll();
             if (trainDetails.subsequentCallingPointsField.length > 0) {
-                this.callingAt = trainDetails.subsequentCallingPointsField[0].callingPointField.sort(function (a, b) {
+                var callingAt = trainDetails.subsequentCallingPointsField[0].callingPointField.sort(function (a, b) {
                     return moment(a.stField, "HH:mm").isBefore(moment(b.stField, "HH:mm")) ? -1 : 1;
                 }).map(function (cp) {
                         var station = StationHelper.findStationByCRSCode(cp.crsField);
@@ -221,9 +253,10 @@ module TrainNotifier.XCityBrum {
                         var difference = diffField.toLowerCase() == TrainDetailsResult.onTime ? 0 : moment(diffField, "HH:mm").diff(moment(cp.stField, "HH:mm"), "minutes");
 
                         return new TrainDetailsStop(station.name, (diffField.toLowerCase() == TrainDetailsResult.onTime ? cp.stField : diffField), completed, difference);
-                    });
-            } else {
-                this.callingAt = [];
+                });
+                for (var i = 0; i < callingAt.length; i++) {
+                    this.callingAt.push(callingAt[i]);
+                }
             }
         }
     }

@@ -8,8 +8,8 @@
 
 @section NavBar{
     <header class="bar bar-nav">
-        <a class="icon icon-left-nav pull-left" id="app-train-link" data-bind="attr: { href: '/station#!' + previousCrsCode }" data-transition="slide-out"></a>
-        <a class="icon icon-refresh pull-right" id="app-refresh"></a>
+        <a class="icon icon-left-nav pull-left" id="app-train-link" data-bind="attr: { href: '/station#!' + previousCrsCode() }" data-transition="slide-out"></a>
+        <a class="icon icon-refresh pull-right" id="app-refresh" onclick="loadTrain();"></a>
         <h1 class="title" id="app-train-title" data-bind="text: title"></h1>
     </header>
 }
