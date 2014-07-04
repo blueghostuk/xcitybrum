@@ -7,7 +7,8 @@ var spinner: Spinner;
 var pages = {
     index: "XCity Brum",
     train: "XCity Brum: Train",
-    station: "XCity Brum: Station"
+    station: "XCity Brum: Station",
+    favourites: "XCity Brum: Favourites",
 };
 
 var spinOpts = {
@@ -53,6 +54,9 @@ function switchPage(page: string) {
 
         case pages.station:
             loadStation();
+            break;
+        case pages.favourites:
+            loadFavs();
             break;
     }
 }
