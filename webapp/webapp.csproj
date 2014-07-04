@@ -183,7 +183,6 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Service References\NationalRail.Darwin\wsdl.wsdl" />
-    <Content Include="settings.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
