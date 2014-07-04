@@ -18,8 +18,7 @@ namespace webapp.App_Start
                 "~/Scripts/underscore.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/ratchet").Include(
-                "~/Scripts/ratchet.js",
-                "~/Scripts/fingerblast.js"));
+                "~/Scripts/ratchet.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/moment").Include(
                 "~/Scripts/moment.js"));
@@ -36,6 +35,7 @@ namespace webapp.App_Start
 
             bundles.Add(new ScriptBundle("~/bundles/app-pages").Include(
                 "~/Scripts/app/pages/index.js",
+                "~/Scripts/app/pages/favourites.js",
                 "~/Scripts/app/pages/station.js",
                 "~/Scripts/app/pages/train.js"));
 
