@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:ldbt="http://thalesgroup.com/RTTI/2012-01-13/ldb/types" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="http://thalesgroup.com/RTTI/2012-01-13/ldb/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ct2="http://thalesgroup.com/RTTI/2010-11-01/ldb/commontypes" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
-  <wsdl:import namespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/types" location="rtti_2012-01-13_ldb_types.xsd" />
-  <wsdl:import namespace="http://thalesgroup.com/RTTI/2010-11-01/ldb/commontypes" location="rtti_2010-11-01_ldb_common_types.xsd" />
+<wsdl:definitions xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="http://thalesgroup.com/RTTI/2014-02-20/ldb/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tok="http://thalesgroup.com/RTTI/2013-11-28/Token/types" targetNamespace="http://thalesgroup.com/RTTI/2014-02-20/ldb/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:import namespace="http://thalesgroup.com/RTTI/2013-11-28/Token/types" location="darwin_token_types_2013-11-28.wsdl" />
   <wsdl:types>
-    <xs:schema xmlns:ct="http://thalesgroup.com/RTTI/2007-10-10/ldb/commontypes" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/types">
+    <xs:schema xmlns:ct="http://thalesgroup.com/RTTI/2007-10-10/ldb/commontypes" xmlns:ldbt2="http://thalesgroup.com/RTTI/2014-02-20/ldb/types" xmlns:ldbt="http://thalesgroup.com/RTTI/2012-01-13/ldb/types" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://thalesgroup.com/RTTI/2014-02-20/ldb/">
       <xs:import schemaLocation="rtti_2007-10-10_ldb_common_types.xsd" namespace="http://thalesgroup.com/RTTI/2007-10-10/ldb/commontypes" />
-      <xs:include schemaLocation="rtti_2012-01-13_ldb_types.xsd" />
-      <xs:complexType name="GetBoardRequest">
+      <xs:import schemaLocation="rtti_2012-01-13_ldb_types.xsd" namespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/types" />
+      <xs:import schemaLocation="rtti_2014-02-20_ldb_types.xsd" namespace="http://thalesgroup.com/RTTI/2014-02-20/ldb/types" />
+      <xs:complexType name="GetBoardRequestParams">
         <xs:sequence>
           <xs:element name="numRows" type="xs:unsignedShort">
             <xs:annotation>
-              <xs:documentation>The maximum number of services that are required to be returned. This will be limited to a maximum value by the server, which may change according to system load 	or other factors. Only the minimum required number of services should be requested. For example, if only 10 services are displayed in a user interface, then this parameter should be set to 10.</xs:documentation>
+              <xs:documentation>The maximum number of services that are required to be returned. This will be limited to a maximum value by the server, which may change according to system load or other factors. Only the minimum required number of services should be requested. For example, if only 10 services are displayed in a user interface, then this parameter should be set to 10.</xs:documentation>
             </xs:annotation>
           </xs:element>
           <xs:element name="crs" type="ct:CRSType">
@@ -20,7 +20,7 @@
           </xs:element>
           <xs:element minOccurs="0" name="filterCrs" type="ct:CRSType">
             <xs:annotation>
-              <xs:documentation>An optional CRS code that will filter the returned departure board. For example, if crs is set to "MAN", filterCRS is set to "EUS" and filterType is set to "to" then the 	departure board will return a list of services that depart Manchester Piccadilly and call at London Euston.</xs:documentation>
+              <xs:documentation>An optional CRS code that will filter the returned departure board. For example, if crs is set to "MAN", filterCRS is set to "EUS" and filterType is set to "to" then the departure board will return a list of services that depart Manchester Piccadilly and call at London Euston.</xs:documentation>
             </xs:annotation>
           </xs:element>
           <xs:element minOccurs="0" default="to" name="filterType" type="ct:FilterType">
@@ -30,86 +30,71 @@
           </xs:element>
           <xs:element minOccurs="0" default="0" name="timeOffset" type="xs:int">
             <xs:annotation>
-              <xs:documentation>A time offset that may be applied to the current time to give the base time for the departure board. The value could be negative if the client has NegativeTimeOffset otherwise the minimun value will be 0. If the client is not configured with the LargeTimeOffset then upper bound will be 119</xs:documentation>
+              <xs:documentation>A time offset that may be applied to the current time to give the base time for the departure board. The value could be negative if the client has suitable permission configured, otherwise the minimun value will be 0. If the client is not configured with suitable permission then upper bound will be 119.</xs:documentation>
             </xs:annotation>
           </xs:element>
           <xs:element minOccurs="0" default="120" name="timeWindow" type="xs:int">
             <xs:annotation>
-              <xs:documentation>The number of minutes added to the request start time to give the end time. The parameter default value is 120 minutes if the supplied value is greater than 120 or not supplied if the supplied pararmeter vaule is less than 0 then an error will return.</xs:documentation>
+              <xs:documentation>The number of minutes added to the request start time to give the end time. The parameter default value is 120 minutes, if the supplied value is greater than 120 or not supplied. If the supplied pararmeter vaule is less than 0 then an error will return.</xs:documentation>
             </xs:annotation>
           </xs:element>
         </xs:sequence>
       </xs:complexType>
-      <xs:element name="GetDepartureBoardRequest" type="ldbt:GetBoardRequest" />
-      <xs:element name="GetArrivalBoardRequest" type="ldbt:GetBoardRequest" />
-      <xs:element name="GetArrivalDepartureBoardRequest" type="ldbt:GetBoardRequest" />
-      <xs:element name="GetServiceDetailsRequest">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="serviceID" type="ldbt:ServiceIDType">
-              <xs:annotation>
-                <xs:documentation>The service ID obtained from a departure board response for which fuill details are required. Note that service details are only available for a short time after a service has arrived/departed from the location in the departure board that the ID was obtained from.</xs:documentation>
-              </xs:annotation>
-            </xs:element>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="GetDepartureBoardResponse">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element minOccurs="0" name="GetDepartureBoardResult" type="ldbt:StationBoard" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="GetArrivalBoardResponse">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element minOccurs="0" name="GetArrivalBoardResult" type="ldbt:StationBoard" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="GetArrivalDepartureBoardResponse">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element minOccurs="0" name="GetArrivalDepartureBoardResult" type="ldbt:StationBoard" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="GetServiceDetailsResponse">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element minOccurs="0" name="GetServiceDetailsResult" type="ldbt:ServiceDetails" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
+      <xs:complexType name="GetServiceDetailsRequestParams">
+        <xs:sequence>
+          <xs:element name="serviceID" type="ldbt:ServiceIDType">
+            <xs:annotation>
+              <xs:documentation>The service ID obtained from a departure board response for which fuill details are required. Note that service details are only available for a short time after a service has arrived/departed from the location in the departure board that the ID was obtained from.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="GetDepartureBoardRequest" type="tns:GetBoardRequestParams" />
+      <xs:element name="GetArrivalBoardRequest" type="tns:GetBoardRequestParams" />
+      <xs:element name="GetArrivalDepartureBoardRequest" type="tns:GetBoardRequestParams" />
+      <xs:element name="GetServiceDetailsRequest" type="tns:GetServiceDetailsRequestParams" />
+      <xs:complexType name="StationBoardResponseType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="GetStationBoardResult" type="ldbt2:StationBoard" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ServiceDetailsResponseType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="GetServiceDetailsResult" type="ldbt2:ServiceDetails" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="GetDepartureBoardResponse" type="tns:StationBoardResponseType" />
+      <xs:element name="GetArrivalBoardResponse" type="tns:StationBoardResponseType" />
+      <xs:element name="GetArrivalDepartureBoardResponse" type="tns:StationBoardResponseType" />
+      <xs:element name="GetServiceDetailsResponse" type="tns:ServiceDetailsResponseType" />
     </xs:schema>
   </wsdl:types>
   <wsdl:message name="GetDepartureBoardSoapIn">
-    <wsdl:part name="parameters" element="ldbt:GetDepartureBoardRequest" />
+    <wsdl:part name="parameters" element="tns:GetDepartureBoardRequest" />
   </wsdl:message>
   <wsdl:message name="GetDepartureBoardSoapOut">
-    <wsdl:part name="parameters" element="ldbt:GetDepartureBoardResponse" />
+    <wsdl:part name="parameters" element="tns:GetDepartureBoardResponse" />
   </wsdl:message>
   <wsdl:message name="GetArrivalBoardSoapIn">
-    <wsdl:part name="parameters" element="ldbt:GetArrivalBoardRequest" />
+    <wsdl:part name="parameters" element="tns:GetArrivalBoardRequest" />
   </wsdl:message>
   <wsdl:message name="GetArrivalBoardSoapOut">
-    <wsdl:part name="parameters" element="ldbt:GetArrivalBoardResponse" />
+    <wsdl:part name="parameters" element="tns:GetArrivalBoardResponse" />
   </wsdl:message>
   <wsdl:message name="GetArrivalDepartureBoardSoapIn">
-    <wsdl:part name="parameters" element="ldbt:GetArrivalDepartureBoardRequest" />
+    <wsdl:part name="parameters" element="tns:GetArrivalDepartureBoardRequest" />
   </wsdl:message>
   <wsdl:message name="GetArrivalDepartureBoardSoapOut">
-    <wsdl:part name="parameters" element="ldbt:GetArrivalDepartureBoardResponse" />
+    <wsdl:part name="parameters" element="tns:GetArrivalDepartureBoardResponse" />
   </wsdl:message>
   <wsdl:message name="GetServiceDetailsSoapIn">
-    <wsdl:part name="parameters" element="ldbt:GetServiceDetailsRequest" />
+    <wsdl:part name="parameters" element="tns:GetServiceDetailsRequest" />
   </wsdl:message>
   <wsdl:message name="GetServiceDetailsSoapOut">
-    <wsdl:part name="parameters" element="ldbt:GetServiceDetailsResponse" />
+    <wsdl:part name="parameters" element="tns:GetServiceDetailsResponse" />
   </wsdl:message>
   <wsdl:message name="AccessTokenMessage">
-    <wsdl:part name="AccessToken" element="ct2:AccessToken" />
+    <wsdl:part name="AccessToken" element="tok:AccessToken" />
   </wsdl:message>
   <wsdl:portType name="LDBServiceSoap">
     <wsdl:operation name="GetDepartureBoard">

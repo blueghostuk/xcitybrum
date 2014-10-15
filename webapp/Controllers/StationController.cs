@@ -25,8 +25,8 @@ namespace webapp.Controllers
                 await Task.WhenAll(new[] { toResult, fromResult });
 
                 return Ok(new[] { 
-                    toResult.Result.GetArrivalDepartureBoardResult,
-                    fromResult.Result.GetArrivalDepartureBoardResult
+                    toResult.Result.GetStationBoardResult,
+                    fromResult.Result.GetStationBoardResult
                 });
             }
         }

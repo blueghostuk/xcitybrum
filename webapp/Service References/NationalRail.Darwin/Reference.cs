@@ -12,10 +12,10 @@ namespace webapp.NationalRail.Darwin {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/", ConfigurationName="NationalRail.Darwin.LDBServiceSoap")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://thalesgroup.com/RTTI/2014-02-20/ldb/", ConfigurationName="NationalRail.Darwin.LDBServiceSoap")]
     public interface LDBServiceSoap {
         
-        // CODEGEN: Generating message contract since the wrapper namespace (http://thalesgroup.com/RTTI/2012-01-13/ldb/types) of message GetDepartureBoardRequest does not match the default value (http://thalesgroup.com/RTTI/2012-01-13/ldb/)
+        // CODEGEN: Generating message contract since the wrapper name (GetDepartureBoardRequest) of message GetDepartureBoardRequest does not match the default value (GetDepartureBoard)
         [System.ServiceModel.OperationContractAttribute(Action="http://thalesgroup.com/RTTI/2012-01-13/ldb/GetDepartureBoard", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         webapp.NationalRail.Darwin.GetDepartureBoardResponse GetDepartureBoard(webapp.NationalRail.Darwin.GetDepartureBoardRequest request);
@@ -23,7 +23,7 @@ namespace webapp.NationalRail.Darwin {
         [System.ServiceModel.OperationContractAttribute(Action="http://thalesgroup.com/RTTI/2012-01-13/ldb/GetDepartureBoard", ReplyAction="*")]
         System.Threading.Tasks.Task<webapp.NationalRail.Darwin.GetDepartureBoardResponse> GetDepartureBoardAsync(webapp.NationalRail.Darwin.GetDepartureBoardRequest request);
         
-        // CODEGEN: Generating message contract since the wrapper namespace (http://thalesgroup.com/RTTI/2012-01-13/ldb/types) of message GetArrivalBoardRequest does not match the default value (http://thalesgroup.com/RTTI/2012-01-13/ldb/)
+        // CODEGEN: Generating message contract since the wrapper name (GetArrivalBoardRequest) of message GetArrivalBoardRequest does not match the default value (GetArrivalBoard)
         [System.ServiceModel.OperationContractAttribute(Action="http://thalesgroup.com/RTTI/2012-01-13/ldb/GetArrivalBoard", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         webapp.NationalRail.Darwin.GetArrivalBoardResponse GetArrivalBoard(webapp.NationalRail.Darwin.GetArrivalBoardRequest request);
@@ -31,7 +31,7 @@ namespace webapp.NationalRail.Darwin {
         [System.ServiceModel.OperationContractAttribute(Action="http://thalesgroup.com/RTTI/2012-01-13/ldb/GetArrivalBoard", ReplyAction="*")]
         System.Threading.Tasks.Task<webapp.NationalRail.Darwin.GetArrivalBoardResponse> GetArrivalBoardAsync(webapp.NationalRail.Darwin.GetArrivalBoardRequest request);
         
-        // CODEGEN: Generating message contract since the wrapper namespace (http://thalesgroup.com/RTTI/2012-01-13/ldb/types) of message GetArrivalDepartureBoardRequest does not match the default value (http://thalesgroup.com/RTTI/2012-01-13/ldb/)
+        // CODEGEN: Generating message contract since the wrapper name (GetArrivalDepartureBoardRequest) of message GetArrivalDepartureBoardRequest does not match the default value (GetArrivalDepartureBoard)
         [System.ServiceModel.OperationContractAttribute(Action="http://thalesgroup.com/RTTI/2012-01-13/ldb/GetArrivalDepartureBoard", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         webapp.NationalRail.Darwin.GetArrivalDepartureBoardResponse GetArrivalDepartureBoard(webapp.NationalRail.Darwin.GetArrivalDepartureBoardRequest request);
@@ -39,7 +39,7 @@ namespace webapp.NationalRail.Darwin {
         [System.ServiceModel.OperationContractAttribute(Action="http://thalesgroup.com/RTTI/2012-01-13/ldb/GetArrivalDepartureBoard", ReplyAction="*")]
         System.Threading.Tasks.Task<webapp.NationalRail.Darwin.GetArrivalDepartureBoardResponse> GetArrivalDepartureBoardAsync(webapp.NationalRail.Darwin.GetArrivalDepartureBoardRequest request);
         
-        // CODEGEN: Generating message contract since the wrapper namespace (http://thalesgroup.com/RTTI/2012-01-13/ldb/types) of message GetServiceDetailsRequest does not match the default value (http://thalesgroup.com/RTTI/2012-01-13/ldb/)
+        // CODEGEN: Generating message contract since the wrapper name (GetServiceDetailsRequest) of message GetServiceDetailsRequest does not match the default value (GetServiceDetails)
         [System.ServiceModel.OperationContractAttribute(Action="http://thalesgroup.com/RTTI/2012-01-13/ldb/GetServiceDetails", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         webapp.NationalRail.Darwin.GetServiceDetailsResponse GetServiceDetails(webapp.NationalRail.Darwin.GetServiceDetailsRequest request);
@@ -49,11 +49,11 @@ namespace webapp.NationalRail.Darwin {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34230")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://thalesgroup.com/RTTI/2010-11-01/ldb/commontypes")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://thalesgroup.com/RTTI/2013-11-28/Token/types")]
     public partial class AccessToken : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string tokenValueField;
@@ -81,7 +81,7 @@ namespace webapp.NationalRail.Darwin {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34230")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -184,11 +184,11 @@ namespace webapp.NationalRail.Darwin {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34230")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/types")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://thalesgroup.com/RTTI/2014-02-20/ldb/types")]
     public partial class ArrayOfCallingPoints : object, System.ComponentModel.INotifyPropertyChanged {
         
         private CallingPoint[] callingPointField;
@@ -200,6 +200,10 @@ namespace webapp.NationalRail.Darwin {
         private bool serviceChangeRequiredField;
         
         private bool serviceChangeRequiredFieldSpecified;
+        
+        private bool assocIsCancelledField;
+        
+        private bool assocIsCancelledFieldSpecified;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("callingPoint", IsNullable=true, Order=0)]
@@ -261,6 +265,30 @@ namespace webapp.NationalRail.Darwin {
             }
         }
         
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public bool assocIsCancelled {
+            get {
+                return this.assocIsCancelledField;
+            }
+            set {
+                this.assocIsCancelledField = value;
+                this.RaisePropertyChanged("assocIsCancelled");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool assocIsCancelledSpecified {
+            get {
+                return this.assocIsCancelledFieldSpecified;
+            }
+            set {
+                this.assocIsCancelledFieldSpecified = value;
+                this.RaisePropertyChanged("assocIsCancelledSpecified");
+            }
+        }
+        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -272,7 +300,7 @@ namespace webapp.NationalRail.Darwin {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34230")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://thalesgroup.com/RTTI/2007-10-10/ldb/commontypes")]
     public enum ServiceType {
@@ -288,11 +316,11 @@ namespace webapp.NationalRail.Darwin {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34230")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/types")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://thalesgroup.com/RTTI/2014-02-20/ldb/types")]
     public partial class ServiceDetails : object, System.ComponentModel.INotifyPropertyChanged {
         
         private System.DateTime generatedAtField;
@@ -532,7 +560,7 @@ namespace webapp.NationalRail.Darwin {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlArrayAttribute(Order=16)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("adhocAlertText")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("adhocAlertText", Namespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/types")]
         public string[] adhocAlerts {
             get {
                 return this.adhocAlertsField;
@@ -580,11 +608,11 @@ namespace webapp.NationalRail.Darwin {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34230")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/types")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://thalesgroup.com/RTTI/2014-02-20/ldb/types")]
     public partial class ServiceLocation : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string locationNameField;
@@ -594,6 +622,12 @@ namespace webapp.NationalRail.Darwin {
         private string viaField;
         
         private string futureChangeToField;
+        
+        private bool assocIsCancelledField;
+        
+        public ServiceLocation() {
+            this.assocIsCancelledField = false;
+        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
@@ -643,6 +677,19 @@ namespace webapp.NationalRail.Darwin {
             }
         }
         
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        [System.ComponentModel.DefaultValueAttribute(false)]
+        public bool assocIsCancelled {
+            get {
+                return this.assocIsCancelledField;
+            }
+            set {
+                this.assocIsCancelledField = value;
+                this.RaisePropertyChanged("assocIsCancelled");
+            }
+        }
+        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -654,11 +701,11 @@ namespace webapp.NationalRail.Darwin {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34230")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/types")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://thalesgroup.com/RTTI/2014-02-20/ldb/types")]
     public partial class ServiceItem : object, System.ComponentModel.INotifyPropertyChanged {
         
         private ServiceLocation[] originField;
@@ -856,7 +903,7 @@ namespace webapp.NationalRail.Darwin {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlArrayAttribute(Order=13)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("adhocAlertText")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("adhocAlertText", Namespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/types")]
         public string[] adhocAlerts {
             get {
                 return this.adhocAlertsField;
@@ -878,7 +925,7 @@ namespace webapp.NationalRail.Darwin {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34230")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -910,11 +957,11 @@ namespace webapp.NationalRail.Darwin {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34230")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/types")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://thalesgroup.com/RTTI/2014-02-20/ldb/types")]
     public partial class StationBoard : object, System.ComponentModel.INotifyPropertyChanged {
         
         private System.DateTime generatedAtField;
@@ -1022,7 +1069,7 @@ namespace webapp.NationalRail.Darwin {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlArrayAttribute(Order=6)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("message")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("message", Namespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/types")]
         public NRCCMessage[] nrccMessages {
             get {
                 return this.nrccMessagesField;
@@ -1109,7 +1156,7 @@ namespace webapp.NationalRail.Darwin {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34230")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://thalesgroup.com/RTTI/2007-10-10/ldb/commontypes")]
     public enum FilterType {
@@ -1124,30 +1171,30 @@ namespace webapp.NationalRail.Darwin {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetDepartureBoardRequest", WrapperNamespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/types", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetDepartureBoardRequest", WrapperNamespace="http://thalesgroup.com/RTTI/2014-02-20/ldb/", IsWrapped=true)]
     public partial class GetDepartureBoardRequest {
         
-        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://thalesgroup.com/RTTI/2010-11-01/ldb/commontypes")]
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://thalesgroup.com/RTTI/2013-11-28/Token/types")]
         public webapp.NationalRail.Darwin.AccessToken AccessToken;
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/types", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2014-02-20/ldb/", Order=0)]
         public ushort numRows;
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/types", Order=1)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2014-02-20/ldb/", Order=1)]
         public string crs;
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/types", Order=2)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2014-02-20/ldb/", Order=2)]
         public string filterCrs;
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/types", Order=3)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2014-02-20/ldb/", Order=3)]
         [System.ComponentModel.DefaultValueAttribute(FilterType.to)]
         public webapp.NationalRail.Darwin.FilterType filterType;
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/types", Order=4)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2014-02-20/ldb/", Order=4)]
         [System.ComponentModel.DefaultValueAttribute(0)]
         public int timeOffset;
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/types", Order=5)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2014-02-20/ldb/", Order=5)]
         [System.ComponentModel.DefaultValueAttribute(120)]
         public int timeWindow;
         
@@ -1168,47 +1215,47 @@ namespace webapp.NationalRail.Darwin {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetDepartureBoardResponse", WrapperNamespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/types", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetDepartureBoardResponse", WrapperNamespace="http://thalesgroup.com/RTTI/2014-02-20/ldb/", IsWrapped=true)]
     public partial class GetDepartureBoardResponse {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/types", Order=0)]
-        public webapp.NationalRail.Darwin.StationBoard GetDepartureBoardResult;
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2014-02-20/ldb/", Order=0)]
+        public webapp.NationalRail.Darwin.StationBoard GetStationBoardResult;
         
         public GetDepartureBoardResponse() {
         }
         
-        public GetDepartureBoardResponse(webapp.NationalRail.Darwin.StationBoard GetDepartureBoardResult) {
-            this.GetDepartureBoardResult = GetDepartureBoardResult;
+        public GetDepartureBoardResponse(webapp.NationalRail.Darwin.StationBoard GetStationBoardResult) {
+            this.GetStationBoardResult = GetStationBoardResult;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetArrivalBoardRequest", WrapperNamespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/types", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetArrivalBoardRequest", WrapperNamespace="http://thalesgroup.com/RTTI/2014-02-20/ldb/", IsWrapped=true)]
     public partial class GetArrivalBoardRequest {
         
-        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://thalesgroup.com/RTTI/2010-11-01/ldb/commontypes")]
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://thalesgroup.com/RTTI/2013-11-28/Token/types")]
         public webapp.NationalRail.Darwin.AccessToken AccessToken;
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/types", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2014-02-20/ldb/", Order=0)]
         public ushort numRows;
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/types", Order=1)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2014-02-20/ldb/", Order=1)]
         public string crs;
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/types", Order=2)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2014-02-20/ldb/", Order=2)]
         public string filterCrs;
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/types", Order=3)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2014-02-20/ldb/", Order=3)]
         [System.ComponentModel.DefaultValueAttribute(FilterType.to)]
         public webapp.NationalRail.Darwin.FilterType filterType;
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/types", Order=4)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2014-02-20/ldb/", Order=4)]
         [System.ComponentModel.DefaultValueAttribute(0)]
         public int timeOffset;
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/types", Order=5)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2014-02-20/ldb/", Order=5)]
         [System.ComponentModel.DefaultValueAttribute(120)]
         public int timeWindow;
         
@@ -1229,47 +1276,47 @@ namespace webapp.NationalRail.Darwin {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetArrivalBoardResponse", WrapperNamespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/types", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetArrivalBoardResponse", WrapperNamespace="http://thalesgroup.com/RTTI/2014-02-20/ldb/", IsWrapped=true)]
     public partial class GetArrivalBoardResponse {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/types", Order=0)]
-        public webapp.NationalRail.Darwin.StationBoard GetArrivalBoardResult;
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2014-02-20/ldb/", Order=0)]
+        public webapp.NationalRail.Darwin.StationBoard GetStationBoardResult;
         
         public GetArrivalBoardResponse() {
         }
         
-        public GetArrivalBoardResponse(webapp.NationalRail.Darwin.StationBoard GetArrivalBoardResult) {
-            this.GetArrivalBoardResult = GetArrivalBoardResult;
+        public GetArrivalBoardResponse(webapp.NationalRail.Darwin.StationBoard GetStationBoardResult) {
+            this.GetStationBoardResult = GetStationBoardResult;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetArrivalDepartureBoardRequest", WrapperNamespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/types", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetArrivalDepartureBoardRequest", WrapperNamespace="http://thalesgroup.com/RTTI/2014-02-20/ldb/", IsWrapped=true)]
     public partial class GetArrivalDepartureBoardRequest {
         
-        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://thalesgroup.com/RTTI/2010-11-01/ldb/commontypes")]
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://thalesgroup.com/RTTI/2013-11-28/Token/types")]
         public webapp.NationalRail.Darwin.AccessToken AccessToken;
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/types", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2014-02-20/ldb/", Order=0)]
         public ushort numRows;
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/types", Order=1)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2014-02-20/ldb/", Order=1)]
         public string crs;
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/types", Order=2)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2014-02-20/ldb/", Order=2)]
         public string filterCrs;
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/types", Order=3)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2014-02-20/ldb/", Order=3)]
         [System.ComponentModel.DefaultValueAttribute(FilterType.to)]
         public webapp.NationalRail.Darwin.FilterType filterType;
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/types", Order=4)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2014-02-20/ldb/", Order=4)]
         [System.ComponentModel.DefaultValueAttribute(0)]
         public int timeOffset;
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/types", Order=5)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2014-02-20/ldb/", Order=5)]
         [System.ComponentModel.DefaultValueAttribute(120)]
         public int timeWindow;
         
@@ -1290,30 +1337,30 @@ namespace webapp.NationalRail.Darwin {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetArrivalDepartureBoardResponse", WrapperNamespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/types", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetArrivalDepartureBoardResponse", WrapperNamespace="http://thalesgroup.com/RTTI/2014-02-20/ldb/", IsWrapped=true)]
     public partial class GetArrivalDepartureBoardResponse {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/types", Order=0)]
-        public webapp.NationalRail.Darwin.StationBoard GetArrivalDepartureBoardResult;
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2014-02-20/ldb/", Order=0)]
+        public webapp.NationalRail.Darwin.StationBoard GetStationBoardResult;
         
         public GetArrivalDepartureBoardResponse() {
         }
         
-        public GetArrivalDepartureBoardResponse(webapp.NationalRail.Darwin.StationBoard GetArrivalDepartureBoardResult) {
-            this.GetArrivalDepartureBoardResult = GetArrivalDepartureBoardResult;
+        public GetArrivalDepartureBoardResponse(webapp.NationalRail.Darwin.StationBoard GetStationBoardResult) {
+            this.GetStationBoardResult = GetStationBoardResult;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetServiceDetailsRequest", WrapperNamespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/types", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetServiceDetailsRequest", WrapperNamespace="http://thalesgroup.com/RTTI/2014-02-20/ldb/", IsWrapped=true)]
     public partial class GetServiceDetailsRequest {
         
-        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://thalesgroup.com/RTTI/2010-11-01/ldb/commontypes")]
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://thalesgroup.com/RTTI/2013-11-28/Token/types")]
         public webapp.NationalRail.Darwin.AccessToken AccessToken;
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/types", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2014-02-20/ldb/", Order=0)]
         public string serviceID;
         
         public GetServiceDetailsRequest() {
@@ -1328,10 +1375,10 @@ namespace webapp.NationalRail.Darwin {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetServiceDetailsResponse", WrapperNamespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/types", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetServiceDetailsResponse", WrapperNamespace="http://thalesgroup.com/RTTI/2014-02-20/ldb/", IsWrapped=true)]
     public partial class GetServiceDetailsResponse {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2012-01-13/ldb/types", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://thalesgroup.com/RTTI/2014-02-20/ldb/", Order=0)]
         public webapp.NationalRail.Darwin.ServiceDetails GetServiceDetailsResult;
         
         public GetServiceDetailsResponse() {
@@ -1384,7 +1431,7 @@ namespace webapp.NationalRail.Darwin {
             inValue.timeOffset = timeOffset;
             inValue.timeWindow = timeWindow;
             webapp.NationalRail.Darwin.GetDepartureBoardResponse retVal = ((webapp.NationalRail.Darwin.LDBServiceSoap)(this)).GetDepartureBoard(inValue);
-            return retVal.GetDepartureBoardResult;
+            return retVal.GetStationBoardResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -1419,7 +1466,7 @@ namespace webapp.NationalRail.Darwin {
             inValue.timeOffset = timeOffset;
             inValue.timeWindow = timeWindow;
             webapp.NationalRail.Darwin.GetArrivalBoardResponse retVal = ((webapp.NationalRail.Darwin.LDBServiceSoap)(this)).GetArrivalBoard(inValue);
-            return retVal.GetArrivalBoardResult;
+            return retVal.GetStationBoardResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -1454,7 +1501,7 @@ namespace webapp.NationalRail.Darwin {
             inValue.timeOffset = timeOffset;
             inValue.timeWindow = timeWindow;
             webapp.NationalRail.Darwin.GetArrivalDepartureBoardResponse retVal = ((webapp.NationalRail.Darwin.LDBServiceSoap)(this)).GetArrivalDepartureBoard(inValue);
-            return retVal.GetArrivalDepartureBoardResult;
+            return retVal.GetStationBoardResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
