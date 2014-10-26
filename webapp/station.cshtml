@@ -8,7 +8,7 @@
 
 @section NavBar{
     <header class="bar bar-nav">
-        <a class="icon icon-left-nav pull-left" href="~/index" data-transition="slide-out"></a>
+        <a class="icon icon-left-nav pull-left" href="~/" data-transition="slide-out"></a>
         <a class="icon icon-refresh pull-right" id="app-refresh" onclick="loadStation();"></a>
         <h1 class="title">X City Brum: <span id="app-station-title" data-bind="text: stationName"></span></h1>
     </header>
@@ -35,7 +35,7 @@
         <!-- /ko -->
         <li class="table-view-cell table-view-divider">Recent Trains</li>
         <!-- ko foreach: recentTrains -->
-        <li class="table-view-cell">
+        <li class="table-view-cell train">
             <a class="navigate-right smaller" data-transition="slide-in" data-bind="attr: { href: '/train#!' + serviceId }">
                 <span class="media-object pull-right" style="vertical-align: middle;">
                     <span data-bind="text: platform"></span>
