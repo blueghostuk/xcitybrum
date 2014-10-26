@@ -44,6 +44,7 @@
                 this.latLng = latLng;
                 this.fullName = fullName;
                 this.isFavourite = ko.observable(false);
+                this.approachingTrains = ko.observableArray();
                 var self = this;
                 this.starClass = ko.computed(function () {
                     return self.isFavourite() ? "icon-star-filled" : "icon-star";
@@ -58,6 +59,37 @@
                     favouriteStations.push(this);
                 }
                 Storage.setStationFavourites(favouriteStations());
+            };
+
+            Station.prototype.update = function (arrivals, departures, limit) {
+                if (typeof limit === "undefined") { limit = 2; }
+                var arrivalTrains;
+                if (arrivals.trainServicesField) {
+                    arrivalTrains = arrivals.trainServicesField.map(function (arrival) {
+                        return new TrainServiceResult(arrival);
+                    });
+                } else {
+                    arrivalTrains = [];
+                }
+                var departureTrains;
+                if (departures.trainServicesField) {
+                    var departureTrains = departures.trainServicesField.map(function (arrival) {
+                        return new TrainServiceResult(arrival);
+                    });
+                } else {
+                    departureTrains = [];
+                }
+
+                var allTrains = arrivalTrains.concat(departureTrains);
+
+                this.approachingTrains.removeAll();
+                var approachingTrains = _.take(allTrains.filter(function (t) {
+                    return !t.isPast;
+                }).sort(function (a, b) {
+                    return a.departure.isBefore(b.departure) ? -1 : 1;
+                }), limit);
+                for (var i = 0; i < approachingTrains.length; i++)
+                    this.approachingTrains.push(approachingTrains[i]);
             };
             return Station;
         })();
@@ -75,7 +107,8 @@
                 this.recentTrains.removeAll();
             };
 
-            StationResult.prototype.update = function (station, arrivals, departures) {
+            StationResult.prototype.update = function (station, arrivals, departures, limit) {
+                if (typeof limit === "undefined") { limit = 4; }
                 this.stationName(station.name);
 
                 var arrivalTrains;
@@ -102,7 +135,7 @@
                     return !t.isPast;
                 }).sort(function (a, b) {
                     return a.departure.isBefore(b.departure) ? -1 : 1;
-                }), 4);
+                }), limit);
                 for (var i = 0; i < approachingTrains.length; i++)
                     this.approachingTrains.push(approachingTrains[i]);
 
@@ -111,7 +144,7 @@
                     return t.isPast;
                 }).sort(function (a, b) {
                     return a.departure.isAfter(b.departure) ? -1 : 1;
-                }), 4);
+                }), limit);
                 for (var i = 0; i < recentTrains.length; i++)
                     this.recentTrains.push(recentTrains[i]);
             };

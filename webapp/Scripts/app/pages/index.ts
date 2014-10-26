@@ -18,6 +18,7 @@ function loadIndex() {
                 return aDist > bDist ? 1 : -1;
             }), 2);
             for (var i = 0; i < nearest.length; i++) {
+                updateStation(nearest[i]);
                 nearestStations.push(nearest[i]);
             }
         });
@@ -60,7 +61,18 @@ function updateSearchResults(query: string) {
     if (query.length > 0) {
         var searchResults = TrainNotifier.XCityBrum.StationHelper.searchStations(query);
         for (var i = 0; i < searchResults.length; i++) {
+            updateStation(searchResults[i]);
             stationSearchResults.push(searchResults[i]);
         }
     }
+}
+
+function updateStation(station: TrainNotifier.XCityBrum.Station) {
+    spinner.spin($("#app-refresh")[0]);
+    webApi.getStationStatus(station)
+        .done(function (result: GetArrivalDepartureBoardResult[]) {
+            station.update(result[0], result[1]);
+        }).always(function () {
+            spinner.stop();
+        });
 }

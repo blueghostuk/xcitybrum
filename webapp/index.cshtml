@@ -8,12 +8,13 @@
 
 @section NavBar{
     <header class="bar bar-nav">
+        <a class="icon icon-refresh pull-right" id="app-refresh"></a>
         <h1 class="title">X City Brum</h1>
     </header>
 }
 
 <style type="text/css">
-    .table-view-cell > a:not(.btn) {
+    .table-view-cell > a:not(.navigate-right) {
         display: inline-block !important;
     }
 </style>
@@ -26,6 +27,23 @@
             <span class="icon pull-right" data-bind="css: starClass, click: toggleFavourite"></span>
             <a data-bind="attr: { href: '/station#!' + crsCode }, text: name" data-transition="slide-in"></a>
         </li>
+        <!-- ko foreach: approachingTrains -->
+        <li class="table-view-cell train">
+            <a class="navigate-right smaller" data-transition="slide-in" data-bind="attr: { href: '/train#!' + serviceId }">
+                <span class="media-object pull-right" style="vertical-align: middle;">
+                    <span data-bind="text: platform" class="platform"></span>
+                </span>
+                <div class="media-body">
+                    <b><span data-bind="text: expectedDeparture"></span></b>
+                    to
+                    <b><span data-bind="text: destination"></span></b>
+                    <br />
+                    <span data-bind="text: due"></span>
+                    <span class="badge" data-bind="text: delay, css: delayClass"></span>
+                </div>
+            </a>
+        </li>
+        <!-- /ko -->
         <!-- /ko -->
         <li class="table-view-cell table-view-divider">Nearest Stations</li>
         <!-- ko foreach: nearest -->
@@ -33,6 +51,23 @@
             <span class="icon pull-right" data-bind="css: starClass, click: toggleFavourite"></span>
             <a data-bind="attr: { href: '/station#!' + crsCode }, text: name" data-transition="slide-in"></a>
         </li>
+        <!-- ko foreach: approachingTrains -->
+        <li class="table-view-cell train">
+            <a class="navigate-right smaller" data-transition="slide-in" data-bind="attr: { href: '/train#!' + serviceId }">
+                <span class="media-object pull-right" style="vertical-align: middle;">
+                    <span data-bind="text: platform" class="platform"></span>
+                </span>
+                <div class="media-body">
+                    <b><span data-bind="text: expectedDeparture"></span></b>
+                    to
+                    <b><span data-bind="text: destination"></span></b>
+                    <br />
+                    <span data-bind="text: due"></span>
+                    <span class="badge" data-bind="text: delay, css: delayClass"></span>
+                </div>
+            </a>
+        </li>
+        <!-- /ko -->
         <!-- /ko -->
         <!-- ko if (nearest().length == 0)-->
         <li class="table-view-cell star">

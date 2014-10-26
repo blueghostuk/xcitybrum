@@ -35,6 +35,7 @@ module TrainNotifier.XCityBrum {
         public starClass: KnockoutComputed<string>;
 
         public isFavourite = ko.observable(false);
+        public approachingTrains = ko.observableArray<TrainServiceResult>();
 
         constructor(public crsCode: string, public name: string, public nextCrs: string, public latLng: GeoLocation, public fullName: string = "") {
             var self = this;
@@ -54,6 +55,37 @@ module TrainNotifier.XCityBrum {
             Storage.setStationFavourites(favouriteStations());
         }
 
+        update(arrivals: GetArrivalDepartureBoardResult, departures: GetArrivalDepartureBoardResult, limit: number = 2) {
+
+            var arrivalTrains: TrainServiceResult[];
+            if (arrivals.trainServicesField) {
+                arrivalTrains = arrivals.trainServicesField.map(function (arrival) {
+                    return new TrainServiceResult(arrival);
+                });
+            } else {
+                arrivalTrains = [];
+            }
+            var departureTrains: TrainServiceResult[];
+            if (departures.trainServicesField) {
+                var departureTrains = departures.trainServicesField.map(function (arrival) {
+                    return new TrainServiceResult(arrival);
+                });
+            } else {
+                departureTrains = [];
+            }
+
+            var allTrains = arrivalTrains.concat(departureTrains);
+
+            this.approachingTrains.removeAll();
+            var approachingTrains = _.take(allTrains.filter(function (t) {
+                return !t.isPast;
+            }).sort(function (a, b) {
+                    return a.departure.isBefore(b.departure) ? -1 : 1;
+                }), limit);
+            for (var i = 0; i < approachingTrains.length; i++)
+                this.approachingTrains.push(approachingTrains[i]);
+        }
+
     }
 
     export class StationResult {
@@ -70,7 +102,7 @@ module TrainNotifier.XCityBrum {
             this.recentTrains.removeAll();
         }
 
-        update(station: Station, arrivals: GetArrivalDepartureBoardResult, departures: GetArrivalDepartureBoardResult) {
+        update(station: Station, arrivals: GetArrivalDepartureBoardResult, departures: GetArrivalDepartureBoardResult, limit: number = 4) {
             this.stationName(station.name);
 
             var arrivalTrains: TrainServiceResult[];
@@ -97,7 +129,7 @@ module TrainNotifier.XCityBrum {
                 return !t.isPast;
             }).sort(function (a, b) {
                     return a.departure.isBefore(b.departure) ? -1 : 1;
-                }), 4);
+                }), limit);
             for (var i = 0; i < approachingTrains.length; i++)
                 this.approachingTrains.push(approachingTrains[i]);
 
@@ -106,7 +138,7 @@ module TrainNotifier.XCityBrum {
                 return t.isPast;
             }).sort(function (a, b) {
                     return a.departure.isAfter(b.departure) ? -1 : 1;
-            }), 4);
+            }), limit);
             for (var i = 0; i < recentTrains.length; i++)
                 this.recentTrains.push(recentTrains[i]);
         }
