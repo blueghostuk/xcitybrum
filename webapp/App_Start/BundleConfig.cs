@@ -8,23 +8,14 @@ namespace webapp.App_Start
         // For more information on Bundling, visit http://go.microsoft.com/fwlink/?LinkId=254725
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                "~/Scripts/jquery-{version}.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
-                "~/Scripts/knockout-{version}.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/underscore").Include(
-                "~/Scripts/underscore.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/ratchet").Include(
-                "~/Scripts/ratchet.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/moment").Include(
-                "~/Scripts/moment.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/spin").Include(
-                "~/Scripts/spin.js"));
+            bundles.Add(new ScriptBundle("~/bundles/libs").Include(
+                "~/Scripts/jquery-{version}.js",
+                "~/Scripts/underscore.js",
+                "~/Scripts/knockout-{version}.js",
+                "~/Scripts/ratchet.js",
+                "~/Scripts/moment.js",
+                "~/Scripts/spin.js",
+                "~/Scripts/fingerblast.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
                 "~/Scripts/app/lib.js",

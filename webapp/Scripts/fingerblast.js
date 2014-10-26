@@ -1,14 +1,11 @@
-﻿// FINGERBLAST.js
-// --------------
-// Adapted from phantom limb by Brian Cartensen
-
-/* jshint bitwise: false */
-/* global GLOBAL: true */
-
+﻿/*! fingerblast - v1.1.1 - 2014-06-25
+ * Original work from phantom limb by Brian Cartensen
+ * Adapted by @fat and @XhmikosR for github.com/twbs/ratchet
+ * Licensed Apache v2
+*/
 (function () {
-
-    'use strict';
-
+    /* jshint bitwise: false */
+    /* global document, window, console, MouseEvent, GLOBAL:true */
     function FingerBlast(element) {
         this.element = typeof element === 'string' ? document.querySelector(element) : element;
 
@@ -91,7 +88,7 @@
         },
 
         click: function (e) {
-            if (e.synthetic) {
+            if (e.synthetic || /^a$/.test(e.target.tagName.toLowerCase())) {
                 return;
             }
             e.preventDefault();
@@ -269,5 +266,4 @@
     };
 
     window.FingerBlast = FingerBlast;
-
-}());
+})();
