@@ -1,0 +1,31 @@
+---
+layout: default
+title: XCity Brum : Train
+menu: <header class="bar bar-nav"><a class="icon icon-left-nav pull-left" id="app-train-link" data-bind="attr: { href: '/station#!' + previousCrsCode() }" data-transition="slide-out"></a><a class="icon icon-refresh pull-right" id="app-refresh" onclick="loadTrain();"></a><h1 class="title" id="app-train-title" data-bind="text: title"></h1></header>
+footer: <nav class="bar bar-tab"><a class="tab-item" href="/"><span class="icon icon-home"></span><span class="tab-label">Home</span></a><a class="tab-item" href="/favourites"><span class="icon icon-star-filled"></span><span class="tab-label">Favourites</span></a><a class="tab-item" href="/about"><span class="icon icon-info"></span><span class="tab-label">About</span></a></nav>
+js: <script type="text/javascript">var loadedPage = pages.train;</script>
+---
+<div class="card" id="app-train-card">
+    <ul class="table-view">
+        <li class="table-view-cell table-view-divider" data-bind="css: headlineCss">
+            <span data-bind="text: headline"></span>
+            <span class="pull-right badge" data-bind="visible: delay, text: delay, css: delayClass"></span>
+        </li>
+        <li class="table-view-cell table-view-divider">Calling At</li>
+        <!-- ko foreach: callingAt -->
+        <li class="table-view-cell">
+            <span class="pull-left" data-bind="text: stationName"></span>
+            <span class="badge pull-right" data-bind="text: timeSuffix, css: timeSuffixClass"></span>
+            <span class="pull-right" data-bind="text: time, css: { bold: completed, italic: !completed }"></span>
+        </li>
+        <!-- /ko -->
+        <li class="table-view-cell table-view-divider">Previous Calling Points</li>
+        <!-- ko foreach: previousCallingPoints -->
+        <li class="table-view-cell">
+            <span class="pull-left" data-bind="text: stationName"></span>
+            <span class="badge pull-right" data-bind="text: timeSuffix, css: timeSuffixClass"></span>
+            <span class="pull-right" data-bind="text: time, css: { bold: completed, italic: !completed }"></span>
+        </li>
+        <!-- /ko -->
+    </ul>
+</div>

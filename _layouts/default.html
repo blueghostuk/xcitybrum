@@ -1,0 +1,11 @@
+{% include head.html %}
+<body>
+    {{ page.menu }}
+    <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
+    <div class="content">
+        {{ content }}
+        {% include footer.html %}
+    </div>
+    {{ page.footer }}
+    {% include scripts.html %}     
+</body>

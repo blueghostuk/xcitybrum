@@ -1,0 +1,31 @@
+---
+layout: default
+title: XCity Brum: Favourites
+menu: <header class="bar bar-nav"><h1 class="title">X City Brum: Favourites</h1></header>
+footer: <nav class="bar bar-tab"><a class="tab-item" href="/"><span class="icon icon-home"></span><span class="tab-label">Home</span></a><a class="tab-item active" href="#"><span class="icon icon-star-filled"></span><span class="tab-label">Favourites</span></a><a class="tab-item" href="/about"><span class="icon icon-info"></span><span class="tab-label">About</span></a></nav>
+css: favourites.css
+js: <script type="text/javascript">var loadedPage = pages.favourites;</script>
+---
+<div class="card">
+    <ul class="table-view" id="app-favs">
+        <li class="table-view-cell table-view-divider">Favourite Stations</li>
+        <!-- ko foreach: favourites -->
+        <li class="table-view-cell star">
+            <span class="icon pull-right" data-bind="css: starClass, click: toggleFavourite"></span>
+            <a data-bind="attr: { href: '/station#!' + crsCode }, text: name" data-transition="slide-in"></a>
+        </li>
+        <!-- /ko -->
+        <li class="table-view-cell table-view-divider">Choose Other Station</li>
+        <li class="table-view-cell star">
+            <form>
+                <input type="search" autocomplete="off" id="app-favs-station-search" placeholder="Enter Station Name or Code">
+            </form>
+        </li>
+        <!-- ko foreach: searchResults -->
+        <li class="table-view-cell star">
+            <span class="icon pull-right" data-bind="css: starClass, click: toggleFavourite"></span>
+            <a data-bind="attr: { href: '/station#!' + crsCode }, text: name" data-transition="slide-in"></a>
+        </li>
+        <!-- /ko -->
+    </ul>
+</div>

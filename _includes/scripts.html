@@ -1,0 +1,31 @@
+<script type="text/javascript" src="{{ site.baseurl }}/Scripts/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="{{ site.baseurl }}/Scripts/underscore.min.js"></script>
+<script type="text/javascript" src="{{ site.baseurl }}/Scripts/knockout-3.2.0.js"></script>
+<script type="text/javascript" src="{{ site.baseurl }}/Scripts/ratchet.min.js"></script>
+<script type="text/javascript" src="{{ site.baseurl }}/Scripts/moment.min.js"></script>
+<script type="text/javascript" src="{{ site.baseurl }}/Scripts/spin.min.js"></script>
+<script type="text/javascript" src="{{ site.baseurl }}/Scripts/fingerblast.js"></script>
+
+<script type="text/javascript" src="{{ site.baseurl }}/Scripts/app/lib.js"></script>
+<script type="text/javascript" src="{{ site.baseurl }}/Scripts/app/stations.js"></script>
+<script type="text/javascript" src="{{ site.baseurl }}/Scripts/app/globalKnockout.js"></script>
+<script type="text/javascript" src="{{ site.baseurl }}/Scripts/app/global.js"></script>
+<script type="text/javascript" src="{{ site.baseurl }}/Scripts/app/webApi.js"></script>
+
+<script type="text/javascript" src="{{ site.baseurl }}/Scripts/app/pages/index.js"></script>
+<script type="text/javascript" src="{{ site.baseurl }}/Scripts/app/pages/favourites.js"></script>
+<script type="text/javascript" src="{{ site.baseurl }}/Scripts/app/pages/station.js"></script>
+<script type="text/javascript" src="{{ site.baseurl }}/Scripts/app/pages/train.js"></script>
+
+<script type="text/javascript">
+    if ('ontouchstart' in window) {
+
+    } else {
+        var fingerBlast = new FingerBlast('body');
+    }
+
+    Settings = { apiBaseUrl: "{{ site.api }}" };
+</script>
+{% if page.js %}
+{{ page.js }}
+{% endif %}

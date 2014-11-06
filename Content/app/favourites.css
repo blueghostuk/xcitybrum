@@ -1,0 +1,3 @@
+﻿.table-view-cell > a:not(.btn) {
+    display: inline-block !important;
+}
