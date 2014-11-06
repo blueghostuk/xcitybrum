@@ -27,4 +27,3 @@ function updateFavouriteSearchResults(query) {
         }
     }
 }
-//# sourceMappingURL=favourites.js.map

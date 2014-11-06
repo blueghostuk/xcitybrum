@@ -47,4 +47,3 @@ allStations.push(new TrainNotifier.XCityBrum.Station("BTG", "Barnt Green", "LOB"
 allStations.push(new TrainNotifier.XCityBrum.Station("ALV", "Alvechurch", "BTG", { lat: 52.347318, lng: -1.96799 }));
 
 allStations.push(new TrainNotifier.XCityBrum.Station("RDC", "Reddich", "ALV", { lat: 52.306349, lng: -1.945543 }));
-//# sourceMappingURL=stations.js.map

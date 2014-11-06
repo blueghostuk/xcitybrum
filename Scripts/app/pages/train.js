@@ -17,4 +17,3 @@ function loadTrain() {
         spinner.stop();
     });
 }
-//# sourceMappingURL=train.js.map

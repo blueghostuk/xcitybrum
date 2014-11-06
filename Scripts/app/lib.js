@@ -158,7 +158,6 @@
                 this.platform = trainService.platformField ? "P" + trainService.platformField : "";
                 this.destination = StationHelper.findStationByCRSCode(trainService.destinationField[0].crsField).name;
 
-                // if terminates etdField is null
                 var expectedDeptField = trainService.etdField ? trainService.etdField : trainService.etaField;
                 var departureField = trainService.stdField ? trainService.stdField : trainService.staField;
 
@@ -220,7 +219,6 @@
 
                 var destStation = StationHelper.findStationByCRSCode(destination.crsField);
 
-                // if terminates then use sta
                 this.title((trainDetails.stdField ? trainDetails.stdField : trainDetails.staField) + " to " + destStation.name);
 
                 if (trainDetails.isCancelledField) {
@@ -373,4 +371,3 @@
     })(TrainNotifier.XCityBrum || (TrainNotifier.XCityBrum = {}));
     var XCityBrum = TrainNotifier.XCityBrum;
 })(TrainNotifier || (TrainNotifier = {}));
-//# sourceMappingURL=lib.js.map

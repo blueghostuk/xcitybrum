@@ -17,4 +17,3 @@
     })(TrainNotifier.XCityBrum || (TrainNotifier.XCityBrum = {}));
     var XCityBrum = TrainNotifier.XCityBrum;
 })(TrainNotifier || (TrainNotifier = {}));
-//# sourceMappingURL=webApi.js.map

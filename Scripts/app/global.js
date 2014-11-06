@@ -58,4 +58,3 @@ function switchPage(page) {
             break;
     }
 }
-//# sourceMappingURL=global.js.map

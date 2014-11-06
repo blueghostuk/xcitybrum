@@ -36,7 +36,6 @@ function loadIndex() {
     });
 }
 
-// http://stackoverflow.com/a/27943/117127
 function getDistanceFromLatLonInKm(position, location) {
     var R = 6371;
     var dLat = deg2rad(location.lat - position.coords.latitude);
@@ -70,6 +69,3 @@ function updateStation(station) {
         spinner.stop();
     });
 }
-
-var loadedPage = pages.index;
-//# sourceMappingURL=index.js.map

@@ -51,5 +51,70 @@
     <TypeScriptRemoveComments>true</TypeScriptRemoveComments>
     <TypeScriptSourceMap>false</TypeScriptSourceMap>
   </PropertyGroup>
+  <ItemGroup>
+    <Content Include="Content\app\favourites.css" />
+    <Content Include="Content\app\index.css" />
+    <Content Include="Content\app\site.css" />
+    <Content Include="Content\images\poweredby.png" />
+    <Content Include="Content\ratchet-theme-android.css" />
+    <Content Include="Content\ratchet-theme-android.min.css" />
+    <Content Include="Content\ratchet-theme-ios.css" />
+    <Content Include="Content\ratchet-theme-ios.min.css" />
+    <Content Include="Content\ratchet.css" />
+    <Content Include="Content\ratchet.min.css" />
+    <Content Include="fonts\ratchicons.svg" />
+    <Content Include="Scripts\fingerblast.js" />
+    <Content Include="about.html" />
+    <Content Include="favourites.html" />
+    <Content Include="index.html" />
+    <Content Include="packages.config" />
+    <Content Include="_includes\end.html" />
+    <Content Include="_includes\footer.html" />
+    <Content Include="_includes\head.html" />
+    <Content Include="_includes\scripts.html" />
+    <None Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.1.js" />
+    <Content Include="Scripts\jquery-2.1.1.min.js" />
+    <Content Include="Scripts\knockout-3.2.0.debug.js" />
+    <Content Include="Scripts\knockout-3.2.0.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\ratchet.js" />
+    <Content Include="Scripts\ratchet.min.js" />
+    <Content Include="Scripts\spin.js" />
+    <Content Include="Scripts\spin.min.js" />
+    <Content Include="Scripts\underscore.js" />
+    <Content Include="Scripts\underscore.min.js" />
+    <Content Include="station.html" />
+    <Content Include="train.html" />
+    <Content Include="_layouts\default.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\ratchicons.eot" />
+    <Content Include="fonts\ratchicons.ttf" />
+    <Content Include="fonts\ratchicons.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery-2.1.1.min.map" />
+    <Content Include="Scripts\underscore.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\app\global.ts" />
+    <TypeScriptCompile Include="Scripts\app\globalKnockout.ts" />
+    <TypeScriptCompile Include="Scripts\app\lib.ts" />
+    <TypeScriptCompile Include="Scripts\app\pages\favourites.ts" />
+    <TypeScriptCompile Include="Scripts\app\pages\index.ts" />
+    <TypeScriptCompile Include="Scripts\app\pages\station.ts" />
+    <TypeScriptCompile Include="Scripts\app\pages\train.ts" />
+    <TypeScriptCompile Include="Scripts\app\stations.ts" />
+    <TypeScriptCompile Include="Scripts\app\webApi.ts" />
+    <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\knockout\knockout.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\moment\moment.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\spin\spin.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\underscore\underscore.d.ts" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
 </Project>

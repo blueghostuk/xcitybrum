@@ -18,4 +18,3 @@ function loadStation() {
     });
     ;
 }
-//# sourceMappingURL=station.js.map
