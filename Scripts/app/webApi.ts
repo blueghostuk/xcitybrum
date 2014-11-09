@@ -64,7 +64,7 @@ module TrainNotifier.XCityBrum {
                 type: "POST",
                 contentType: "application/json",
                 data: {
-                    ServiceId: serviceId
+                    { ServiceId: serviceId }
                 }
             });
         }
