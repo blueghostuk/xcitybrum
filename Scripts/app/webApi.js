@@ -12,9 +12,7 @@
                 return $.ajax(Settings.apiBaseUrl + "darwin/service/request", {
                     type: "POST",
                     contentType: "application/json",
-                    data: {
-                        ServiceId: serviceId
-                    }
+                    data: JSON.stringify({ ServiceId: serviceId })
                 });
             };
             return WebApi;
