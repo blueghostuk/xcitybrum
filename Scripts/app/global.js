@@ -3,9 +3,9 @@ var spinner;
 
 var pages = {
     index: "XCity Brum",
-    train: "XCity Brum: Train",
-    station: "XCity Brum: Station",
-    favourites: "XCity Brum: Favourites"
+    train: "XCity Brum : Train",
+    station: "XCity Brum : Station",
+    favourites: "XCity Brum : Favourites"
 };
 
 var spinOpts = {
