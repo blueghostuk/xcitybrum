@@ -9,7 +9,7 @@
             };
 
             WebApi.prototype.getService = function (serviceId) {
-                return $.getJSON(Settings.apiBaseUrl + "darwin/services/", { serviceId: serviceId });
+                return $.getJSON(Settings.apiBaseUrl + "darwin/services/" + serviceId);
             };
             return WebApi;
         })();

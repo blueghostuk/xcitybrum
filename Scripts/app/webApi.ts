@@ -60,7 +60,7 @@ module TrainNotifier.XCityBrum {
         }
 
         getService(serviceId: string) {
-            return $.getJSON(Settings.apiBaseUrl + "darwin/services/" + serviceId });
+            return $.getJSON(Settings.apiBaseUrl + "darwin/services/" + serviceId);
         }
 
     }
