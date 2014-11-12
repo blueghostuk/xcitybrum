@@ -4,4 +4,4 @@ apiname: xcitybrum
 name: xcitybrum.co.uk
 
 # exclude visual studio and other stuff from deployment
-exclude: ["bin",".nuget",".gitattributes",".gitignore","CNAME","xcitybrum.*","xcitybrum.*","Gemfile*","README.md","LICENSE","Scripts/typings","Scripts/app/*.ts","Scripts/app/*.js.map"]
+exclude: ["bin",".nuget",".gitattributes",".gitignore","CNAME","xcitybrum.*","xcitybrum.*","packages.config","Gemfile*","README.md","LICENSE","Scripts/typings","Scripts/app/*.ts","Scripts/app/*.js.map"]
